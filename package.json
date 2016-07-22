@@ -8,5 +8,5 @@
   , "contributors": [
         { "name": "Stefano Balietti", "email": "futur.dorko@gmail.com" }
     ]
-  , "main": 'index.js'
+  , "main": "index.js"
 }
