@@ -1,0 +1,11 @@
+{
+    "name": "nodegame-game-template"
+  , "description": "Template files for a standard nodeGame game"
+  , "version": "2.0.0"
+  , "homepage": "http://nodegame.org"
+  , "keywords": ["nodegame", "template", "game"]
+  , "author": "Stefano Balietti <futur.dorko@gmail.com>"
+  , "contributors": [
+        { "name": "Stefano Balietti", "email": "futur.dorko@gmail.com" }
+    ]
+}
