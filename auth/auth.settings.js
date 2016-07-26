@@ -80,7 +80,7 @@ module.exports = {
      *
      * The name of the codes file inside auth/ dir or a full path to it
      *
-     * Available formast: .csv and .json.
+     * Available formats: .csv and .json.
      *
      * Modes: 'local'
      * Default: 'codes.json', 'code.csv' (tried in sequence)
@@ -102,7 +102,7 @@ module.exports = {
      *
      * The name of the codes dump file inside auth/ dir or a full path to it
      *
-     * Only used, if `dumpCodes` is TRUE. Available formast: .csv and .json.
+     * Only used, if `dumpCodes` is TRUE. Available formats: .csv and .json.
      *
      * Modes: 'dummy', 'auto', 'local', 'remote', 'custom'
      * Default: 'codes.imported.csv'
