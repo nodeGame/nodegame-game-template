@@ -1,4 +1,7 @@
 # CHANGELOG
 
+## 2.0.2
+- Socket.IO option in public/js/index.js 'reconnect' -> 'reconnection'.
+
 ## 2.0.1
 - Created repo from template in nodegame-generator.
