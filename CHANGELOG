@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.0.3
+- Documentation use of aliases and node.connect().
+
 ## 2.0.2
 - Socket.IO option in public/js/index.js 'reconnect' -> 'reconnection'.
 
