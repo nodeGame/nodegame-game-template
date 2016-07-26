@@ -8,13 +8,13 @@
  *
  * Player and admin server share all options specified here. If custom
  * options for each server are needed, they can be specified inside the
- * `playerServer` and `adminServer` properties. 
+ * `playerServer` and `adminServer` properties.
  *
- * Each server must define an 'endpoint' to which nodeGame clients 
+ * Each server must define an 'endpoint' to which nodeGame clients
  * can connect. The default server endpoints are:
  *
- *   - player server: name of the game, 
- *   - admin server: name of the game /admin 
+ *   - player server: name of the game,
+ *   - admin server: name of the game /admin
  *
  * http://www.nodegame.org
  * ---
@@ -38,6 +38,10 @@ module.exports = {
      * By default, if 'gameName' is the name of the channel, files will
      * be served from the address: `http://myserver/gameName/`.
      * Here you can add aliases to enable urls like: `http://myserver/alias/`.
+     *
+     * Important! `node.connect()` in `public/js/index.js` still needs
+     * to use the real channel name, so you might need to pass it explicitly:
+     * `node.connect('/gameName').
      */
     // alias: [],
 
@@ -82,7 +86,7 @@ module.exports = {
      * ## accessDeniedUrl (string) Optional
      *
      * Unauthorized clients will be redirected here.
-     *  
+     *
      * Default: "/pages/accessdenied.htm"
      */
     // accessDeniedUrl: 'unauth.htm',
@@ -114,7 +118,7 @@ module.exports = {
     /**
      * ## enableReconnections (boolean) Optional
      *
-     * If TRUE, only one TAB per browser will be allowed 
+     * If TRUE, only one TAB per browser will be allowed
      *
      * Default: FALSE
      */
