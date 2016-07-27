@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.1.0
+- An error is thrown if the authorization mode is unknown.
+
 ## 2.0.3
 - Documentation use of aliases and node.connect().
 
