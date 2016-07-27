@@ -157,38 +157,48 @@ module.exports = function(settings, done) {
 
     // Asynchronous.
 
-    // Reads in descil-mturk configuration.
-    confPath = path.resolve(__dirname, 'descil.conf.js');
-    dk = require('descil-mturk')();
-
-    dk.readConfiguration(confPath);
-
-    // Load code database.
     if (settings.mode === 'remote') {
 
-        // Convert format.
-        dk.codes.on('insert', function(o) {
-            o.id = o.AccessCode;
-        });
+        // Reads in descil-mturk configuration.
+        confPath = path.resolve(__dirname, 'descil.conf.js');
+        dk = require('descil-mturk')();
 
-        dk.getCodes(function() {
-            if (!dk.codes.size()) {
-                done('Auth.codes: no codes found!');
-            }
-            console.log(dk.codes.db);
-            done(null, dk.codes.db);
-        });
+        dk.readConfiguration(confPath);
+
+        // Load code database.
+        if (settings.mode === 'remote') {
+
+            // Convert format.
+            dk.codes.on('insert', function(o) {
+                o.id = o.AccessCode;
+            });
+
+            dk.getCodes(function() {
+                if (!dk.codes.size()) {
+                    done('Auth.codes: no codes found!');
+                }
+                console.log(dk.codes.db);
+                done(null, dk.codes.db);
+            });
+        }
+        else if (settings.mode === 'local') {
+            dk.readCodes(function() {
+                if (!dk.codes.size()) {
+                    done('Auth.codes: no codes found!');
+                }
+            });
+        }
+        else {
+            done('Auth.codes: Unknown settings.');
+        }
+
+        return;
     }
-    else if (settings.mode === 'local') {
-        dk.readCodes(function() {
-            if (!dk.codes.size()) {
-                done('Auth.codes: no codes found!');
-            }
-        });
-    }
-    else {
-        done('Auth.codes: Unknown settings.');
-    }
+
+    // Unknown code.
+
+    throw new Error('Unknown authorization mode: ' + settings.mode);
+
 
     // ## Helper functions.
 
