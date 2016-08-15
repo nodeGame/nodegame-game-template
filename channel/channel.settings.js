@@ -126,10 +126,11 @@ module.exports = {
 
     // If TRUE, it will be the default channel of the server.
     // All the static files will be served from '/'.
+    // The route `/channelName` will be disabled, while aliases,
+    // if defined, will continue to work.
     // Important! Socket.io connection must still be established
     // with the right endpoint (e.g. /channelName).
-    // Important! If this option is enabled, other games might
-    // not be reachable (aliases of this game are fine).
+    // Important! Other games might not be reachable any more.
     // defaultChannel: false
 
 };
