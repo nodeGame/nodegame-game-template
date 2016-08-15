@@ -122,6 +122,14 @@ module.exports = {
      *
      * Default: FALSE
      */
-    enableReconnections: true
+    enableReconnections: true,
+
+    // If TRUE, it will be the default channel of the server.
+    // All the static files will be served from '/'.
+    // Important! Socket.io connection must still be established
+    // with the right endpoint (e.g. /channelName).
+    // Important! If this option is enabled, other games might
+    // not be reachable (aliases of this game are fine).
+    // defaultChannel: false
 
 };
