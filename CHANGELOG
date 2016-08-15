@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.2.0
+- Added favicon.
+
 ## 2.1.0
 - An error is thrown if the authorization mode is unknown.
 
