@@ -38,6 +38,18 @@ module.exports = {
     },
 
     /**
+     * ## viewportSize
+     *
+     * If set, client must have a resolution between the min and max specified
+     */
+    viewportSize: {
+        minX: 1366,
+        minY: 768,
+        // maxX: 13660,
+        // maxY: 7680
+    },
+
+    /**
      * ## cookieSupport
      *
      * If set, client must support setting cookies.

@@ -19,8 +19,12 @@ module.exports = function(requirements, settings) {
         requirements.add(ngr.cookieSupport, settings.cookieSupport);
     }
 
-    if ('object' !== typeof settings.speedTest) {
+    if ('object' === typeof settings.speedTest) {
         requirements.add(ngr.speedTest, settings.speedTest);
+    }
+
+    if ('object' === typeof settings.viewportSize) {
+        requirements.add(ngr.viewportSize, settings.viewportSize);
     }
 
     if ('undefined' !== typeof settings.excludeBrowsers) {

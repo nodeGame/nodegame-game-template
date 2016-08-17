@@ -132,5 +132,6 @@ module.exports = {
     // with the right endpoint (e.g. /channelName).
     // Important! Other games might not be reachable any more.
     // defaultChannel: false
+    // Important! Server info query will be disabled.
 
 };
