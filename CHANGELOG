@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.3.0
+- File: requirements.js and requirements.settings.js updated to support viewportSize test.
+- Test speedTest might have not worked properly in previous version, fix added.
+- Errors are thrown in requirements.js if parameters are not as expected.
+
 ## 2.2.0
 - Added favicon.
 
@@ -13,4 +18,4 @@
 - Socket.IO option in public/js/index.js 'reconnect' -> 'reconnection'.
 
 ## 2.0.1
-- Created repo from template in nodegame-generator.
+- Created repo from template in nodegame-generator.`
