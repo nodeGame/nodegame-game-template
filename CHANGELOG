@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.4.0
+- Added requirement option: `browserDetect`.
+
 ## 2.3.0
 - File: requirements.js and requirements.settings.js updated to support viewportSize test.
 - Test speedTest might have not worked properly in previous version, fix added.
