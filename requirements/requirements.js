@@ -67,7 +67,6 @@ module.exports = function(requirements, settings) {
         //     !settings.browserDetect.desktopOnly)
 
         if (!settings.browserDetect.parser) {
-            debugger
             settings.browserDetect.parser = ngr.parser;
         }
         requirements.add(ngr.browserDetect, settings.browserDetect);
