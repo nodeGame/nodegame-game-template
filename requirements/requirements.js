@@ -52,9 +52,25 @@ module.exports = function(requirements, settings) {
                             'or undefined. Found: ' + settings.maxExecTime);
     }
 
-    // Experimental.
-    if ('undefined' !== typeof settings.excludeBrowsers) {
-        requirements.add(ngr.browserDetect, settings.excludeBrowsers);
+    if ('object' === typeof settings.browserDetect) {
+        if (settings.browserDetect.cb &&
+            'function' !== typeof settings.browserDetect.cb) {
+
+            throw new TypeError(errBegin + 'browserDetect.cb must be ' +
+                                'function or undefined. Found: ' +
+                                settings.browserDetect.cb);
+        }
+
+        // TODO: define a good set of options.
+        // if (!settings.browserDetect.cb && !settings.browserDetect.include &&
+        //     !settings.browserDetect.exclude &&
+        //     !settings.browserDetect.desktopOnly)
+
+        if (!settings.browserDetect.parser) {
+            debugger
+            settings.browserDetect.parser = ngr.parser;
+        }
+        requirements.add(ngr.browserDetect, settings.browserDetect);
     }
 
     // requirements.add(ngr.testFail);
