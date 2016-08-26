@@ -72,7 +72,7 @@ module.exports = {
      *
      * Time and date of the start of the game.
      *
-     * Overrides `MAX_WAIT_TIME`. 
+     * Overrides `MAX_WAIT_TIME`.
      *
      * Accepted values: any valid argument to `Date` constructor.
      */
@@ -99,6 +99,55 @@ module.exports = {
     CHOSEN_TREATMENT: function(treatments, roomCounter) {
         return treatments[roomCounter % treatments.length];
     },
+
+    /**
+     * ## PLAYER_SORTING
+     *
+     * Sorts the order of players before dispatching them
+     *
+     * Sorting takes place only if:
+     *
+     *  - the number of connected players > GROUP_SIZE,
+     *  - PLAYER_GROUPING is undefined
+     *
+     * Accepted values:
+     *
+     *   - 'timesNotSelected': (default) gives priority to players that
+     *        have not been selected by a previous call to dispatch
+     *   - undefined: rollback to default choice
+     *   - null: no sorting (players are anyway randomly shuffled).
+     *   - function: a comparator function implementing a criteria
+     *       for sorting two objects. E.g:
+     *
+     *        function timesNotSelected(a, b) {
+     *            if ((a.timesNotSelected || 0) < b.timesNotSelected) {
+     *                return -1;
+     *            }
+     *            else if ((a.timesNotSelected || 0) > b.timesNotSelected) {
+     *                return 1;
+     *            }
+     *            return 0;
+     *        }
+     */
+    // PLAYER_SORTING: 'timesNotSelected'
+
+    /**
+     * ## PLAYER_GROUPING
+     *
+     * Creates groups of players to be assigned to treatments
+     *
+     * This method is alternative to "sorting" and will be invoked only
+     * if the number of connected players > GROUP_SIZE
+     *
+     * @param {PlayerList} pList The list of players to group
+     * @param {number} nGroups The number of groups requested by current
+     *   dispatch
+     *
+     * @return {array} An array of nGroups arrays of player objects
+     */
+    // PLAYER_GROUPING: function(pList, nGroups) {
+    //     return [ [ pl1, pl2 ] [ pl3, pl4 ] ];
+    // }
 
     /**
      * ## ON_TIMEOUT (function) Optional
