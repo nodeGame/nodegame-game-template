@@ -19,10 +19,6 @@ install:
   - ln -s .. node_modules/nodegame-game-template
   - bin/install-nodegame-for-module.sh -g "nodegame-window nodegame-widgets JSUS NDDB shelf.js nodegame-client descil-mturk nodegame-db nodegame-requirements nodegame-monitor nodegame-mongodb"
   - npm install
-# Patch express connect.
-#  - patch node_modules/express/node_modules/connect/lib/middleware/static.js < bin/ng.connect.static.js.patch
-# Rebuild js files.
-  - node bin/make.js build-client -a -o nodegame-full
 
 script:
 # Add nodegame-server tests here.
