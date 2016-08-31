@@ -17,7 +17,7 @@ install:
   - mkdir -p nodegame node_modules
   - ln -s ../node_modules nodegame/node_modules
   - ln -s .. node_modules/nodegame-game-template
-  - bin/install-nodegame-for-module.sh -g "nodegame-window nodegame-widgets JSUS NDDB shelf.js nodegame-client descil-mturk nodegame-db nodegame-requirements nodegame-monitor nodegame-mongodb"
+  - bin/install-nodegame-for-module.sh -g "nodegame-window nodegame-widgets JSUS NDDB shelf.js nodegame-server nodegame-client descil-mturk nodegame-db nodegame-requirements nodegame-monitor nodegame-mongodb"
   - npm install
 
 script:
