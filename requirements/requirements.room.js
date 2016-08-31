@@ -62,7 +62,8 @@ module.exports = function(settings, room, runtimeConf) {
     // Define stager.
 
     stager.setOnInit(function init() {
-        var that = this;
+        var that, i, len;
+        that = this;
 
         node.on.preconnect(function(player) {
             console.log('Player re-connected to Requirements room.');
@@ -79,15 +80,25 @@ module.exports = function(settings, room, runtimeConf) {
 
         // Results of the requirements check.
         node.on.data('requirements', function(msg) {
-            console.log('requirements');
-            console.log(msg.data);
             if (msg.data.success) {
+                console.log('requirements passed', msg.from);
+
                 // Mark client as requirements passed.
                 registry.updateClient(msg.from, {apt: true});
 
                  setTimeout(function() {
                      channel.moveClient(msg.from, nextRoom);
                  }, 1000);
+            }
+            else {
+                console.log('requirements failed', msg.from);
+                i = -1, len = msg.data.results.length;
+                for ( ; ++i < len ; ) {
+                    if (!msg.data.results[i].success) {
+                        console.log(msg.data.results[i]);
+                    }
+                }
+
             }
         });
 
