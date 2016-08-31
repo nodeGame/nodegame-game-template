@@ -177,13 +177,29 @@ module.exports = {
      * A new game room will be created for the first dispatch, and
      * reused for all successive groups. Default, FALSE.
      *
-     * !Notice the game must support adding players while it is running.
+     * Notice: the game must support adding players while it is running.
      *
      * Default: FALSE
      *
      * @see WaitingRoom.lastGameRoom
      */
     // DISPATCH_TO_SAME_ROOM: true
+
+    /**
+     * ## PING_BEFORE_DISPATCH (boolean) Optional
+     *
+     * If TRUE, all players are pinged before a dispatch
+     *
+     * Non-responding clients are disconnected.
+     *
+     * If only one player is needed and mode is 'WAIT_FOR_N_PLAYERS',
+     * pinging is skipped.
+     *
+     * Default: TRUE
+     *
+     * @see WaitingRoom.dispatch
+     */
+    // this.PING_BEFORE_DISPATCH = true;
 
     /**
      * ## logicPath (string) Optional
@@ -195,7 +211,7 @@ module.exports = {
     // logicPath: 'path/to/a/wait.room.js',
 
     /**
-     * ## DISCONNECT_IF_NOT_SELECTED (boolean) Optional [experimental]
+     * ## DISCONNECT_IF_NOT_SELECTED (boolean) Optional
      *
      * Disconnect a client if not selected for a game when dispatching
      */
