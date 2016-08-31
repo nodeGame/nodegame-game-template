@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.3
+- Added option PING_BEFORE_DISPATCH to waitroom.settings.
+- Better output in requirements.room.
+
 ## 2.4.2
 - Added options PLAYER_GROUPING and PLAYER_SORTING to waitroom.settings.js template.
 
