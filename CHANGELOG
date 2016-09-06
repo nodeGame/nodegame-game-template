@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.4.4
+- Requirements room readds monitor on reconnect.
+
 ## 2.4.3
 - Added option PING_BEFORE_DISPATCH to waitroom.settings.
 - Better output in requirements.room.
