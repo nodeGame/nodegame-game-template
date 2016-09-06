@@ -59,6 +59,10 @@ module.exports = function(settings, room, runtimeConf) {
         }, 500);
     }
 
+    function monitorReconnects(p) {
+        node.game.ml.add(p);
+    }
+
     // Define stager.
 
     stager.setOnInit(function init() {
@@ -77,6 +81,10 @@ module.exports = function(settings, room, runtimeConf) {
             console.log('Player disconnected from Requirements room: ' +
                         player.id);
         });
+
+        // This must be done manually for now.
+        // (maybe will change in the future).
+        node.on.mreconnect(monitorReconnects);
 
         // Results of the requirements check.
         node.on.data('requirements', function(msg) {
