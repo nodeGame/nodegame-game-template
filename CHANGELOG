@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.4.5
+- Waiting room stops the game of incoming players.
+
 ## 2.4.4
 - Requirements room readds monitor on reconnect.
 
