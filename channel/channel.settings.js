@@ -124,6 +124,23 @@ module.exports = {
      */
     enableReconnections: true,
 
+
+    /**
+     * ### sioQuery (boolean) Optional
+     *
+     * If TRUE, clients connecting via Socket.io can set own parameters
+     *
+     * Available parameters:
+     *
+     *  - clientType: sets the client type
+     *  - startingRoom: sets the room in which the client will be placed first
+     *
+     * It is recommended to disable sioQuery in production
+     *
+     * Default: TRUE
+     */
+    // sioQuery: FALSE,
+
     // If TRUE, it will be the default channel of the server.
     // All the static files will be served from '/'.
     // The route `/channelName` will be disabled, while aliases,
@@ -131,7 +148,7 @@ module.exports = {
     // Important! Socket.io connection must still be established
     // with the right endpoint (e.g. /channelName).
     // Important! Other games might not be reachable any more.
-    // defaultChannel: false
     // Important! Server info query will be disabled.
+    // defaultChannel: false
 
 };
