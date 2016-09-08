@@ -51,6 +51,10 @@ module.exports = function(settings, waitRoom, runtimeConf) {
         var waitTime;
         var widgetConfig;
 
+        // TODO: send only one message?
+
+        node.remoteCommand('stop', p.id);
+
         node.remoteSetup('page', p.id, {
             clearBody: true,
             title: { title: 'Welcome!', addToBody: true }
