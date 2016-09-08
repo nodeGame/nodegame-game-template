@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.4.6
+- sioQuery in channel.settings template.
+
 ## 2.4.5
 - Waiting room stops the game of incoming players.
 
