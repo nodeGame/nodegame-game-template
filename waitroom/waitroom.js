@@ -50,6 +50,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
         var nPlayers;
         var waitTime;
         var widgetConfig;
+        var n;
 
         // TODO: send only one message?
 
@@ -74,7 +75,6 @@ module.exports = function(settings, waitRoom, runtimeConf) {
             pList = waitRoom.clients.player;
             nPlayers = pList.size();
 
-
             if (waitRoom.START_DATE) {
                 waitTime = new Date(waitRoom.START_DATE).getTime() -
                     (new Date().getTime());
@@ -93,20 +93,57 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
             console.log('NPL ', nPlayers);
 
-            // Notify all players of new connection.
-            node.say('PLAYERSCONNECTED', 'ROOM', nPlayers);
-
             // Start counting a timeout for max stay in waiting room.
             waitRoom.makeTimeOut(p.id, waitTime);
 
-            // Wait for all players to connect.
-            if (nPlayers < waitRoom.POOL_SIZE) return;
+            // In TIMEOUT mode it does not matter how many players we have.
+            // Dispatch will happen at a certain time in the future.
+            if (waitRoom.EXECUTION_MODE !== 'WAIT_FOR_N_PLAYERS') return;
 
-            if (waitRoom.EXECUTION_MODE === 'WAIT_FOR_N_PLAYERS') {
-                waitRoom.dispatch({
-                    action: 'AllPlayersConnected',
-                    exit: 0
-                });
+            // Wait for all players to connect.
+            if (nPlayers < waitRoom.POOL_SIZE) {
+                if (!node.game.notifyTimeout) {
+                    // Group together a few connect-notifications
+                    // before sending them.
+                    node.game.notifyTimeout = setTimeout(function() {
+                        // Delete timeout.
+                        node.game.notifyTimeout = null;
+                        // Notify all players of new connection/s.
+                        node.say('PLAYERSCONNECTED', 'ROOM',
+                                 node.game.pl.size());
+                    }, 200);
+                }
+            }
+            // Prepare to dispatch!
+            else {
+
+                // Send immediately the number of players notification.
+                node.say('PLAYERSCONNECTED', 'ROOM', nPlayers);
+                if (node.game.notifyTimeout) {
+                    node.game.notifyTimeout = null;
+                    clearTimeout(node.game.notifyTimeout);
+                }
+
+                // Number of games requested.
+                n = Math.floor(waitRoom.POOL_SIZE / waitRoom.GROUP_SIZE);
+
+                // Dispatch immediately.
+                if (nPlayers === 1) {
+                    waitRoom.dispatch({
+                        action: 'AllPlayersConnected',
+                        exit: 0
+                    }, n);
+                }
+                // Timeout0: make sure other messages are sent
+                // (players can be disconnected by dispatch).
+                else {
+                    setTimeout(function() {
+                        waitRoom.dispatch({
+                            action: 'AllPlayersConnected',
+                            exit: 0
+                        }, n);
+                    });
+                }
             }
         }
         else {
@@ -119,6 +156,8 @@ module.exports = function(settings, waitRoom, runtimeConf) {
     }
 
     stager.setOnInit(function() {
+
+        this.notifyTimeout = null;
 
         // This callback is executed when a player connects to the channel.
         node.on.pconnect(clientConnects);
