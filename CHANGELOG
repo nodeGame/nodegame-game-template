@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.5.0
+- Optimized dispatching and notifying of new connections.
+- Avoiding sending messages to clients disconnected by dispatch.
+
 ## 2.4.6
 - sioQuery in channel.settings template.
 
