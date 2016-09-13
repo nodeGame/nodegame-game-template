@@ -38,6 +38,10 @@ module.exports = function(settings, waitRoom, runtimeConf) {
             // Free up the code.
             channel.registry.markValid(p.id);
         }
+
+        // Call ON_DISCONNECT, if found.
+        if (waitRoom.ON_DISCONNECT) waitRoom.ON_DISCONNECT(waitRoom, p);
+
         wRoom = waitRoom.clients.player;
         for (i = 0; i < wRoom.size(); i++) {
             node.say('PLAYERSCONNECTED', wRoom.db[i].id, wRoom.size());
@@ -93,6 +97,9 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
             console.log('NPL ', nPlayers);
 
+            // Call ON_CONNECT, if found.
+            if (waitRoom.ON_CONNECT) waitRoom.ON_CONNECT(waitRoom, p);
+
             // Start counting a timeout for max stay in waiting room.
             waitRoom.makeTimeOut(p.id, waitTime);
 
@@ -102,6 +109,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
             // Wait for all players to connect.
             if (nPlayers < waitRoom.POOL_SIZE) {
+
                 if (!node.game.notifyTimeout) {
                     // Group together a few connect-notifications
                     // before sending them.
@@ -147,6 +155,9 @@ module.exports = function(settings, waitRoom, runtimeConf) {
             }
         }
         else {
+            // Call ON_CONNECT, if found.
+            if (waitRoom.ON_CONNECT) waitRoom.ON_CONNECT(waitRoom, p);
+            // Also disconnects (client-side).
             node.say('ROOM_CLOSED', p.id);
         }
     }
@@ -181,10 +192,6 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
     return {
         nodename: 'standard_wroom',
-        metadata: {
-            name: 'standard_wroom',
-            version: '1.0.0'
-        },
         plot: stager.getState(),
         debug: settings.debug || false,
         verbosity: 0
