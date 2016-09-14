@@ -43,26 +43,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
         if (waitRoom.ON_DISCONNECT) waitRoom.ON_DISCONNECT(waitRoom, p);
 
         // Notify players that somebody disconnected.
-        notifyNP();
-    }
-
-    // Sends to players the current number of players.
-    // Updates are sent with a timeout, unless the number is specified.
-    function notifyNP(np) {
-        if ('number' === typeof np) {
-            node.say('PLAYERSCONNECTED', 'ROOM', np);
-        }
-        else if (!node.game.notifyTimeout) {
-            // Group together a few connect-notifications
-            // before sending them.
-            node.game.notifyTimeout = setTimeout(function() {
-                // Delete timeout.
-                node.game.notifyTimeout = null;
-                // Notify all players of new connection/s.
-                node.say('PLAYERSCONNECTED', 'ROOM',
-                         node.game.pl.size());
-            }, 200);
-        }
+        waitRoom.notifyPlayerUpdate();
     }
 
     // Using self-calling function to put `firstTime` into closure.
@@ -126,13 +107,13 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
             // Wait for all players to connect.
             if (nPlayers < waitRoom.POOL_SIZE) {
-                notifyNP();
+                waitRoom.notifyPlayerUpdate();
             }
             // Prepare to dispatch!
             else {
 
                 // Send immediately the number of players notification.
-                notifyNP(nPlayers);
+                waitRoom.notifyPlayerUpdate(nPlayers);
 
                 if (node.game.notifyTimeout) {
                     node.game.notifyTimeout = null;
