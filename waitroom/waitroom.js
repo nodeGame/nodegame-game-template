@@ -42,9 +42,26 @@ module.exports = function(settings, waitRoom, runtimeConf) {
         // Call ON_DISCONNECT, if found.
         if (waitRoom.ON_DISCONNECT) waitRoom.ON_DISCONNECT(waitRoom, p);
 
-        wRoom = waitRoom.clients.player;
-        for (i = 0; i < wRoom.size(); i++) {
-            node.say('PLAYERSCONNECTED', wRoom.db[i].id, wRoom.size());
+        // Notify players that somebody disconnected.
+        notifyNP();
+    }
+
+    // Sends to players the current number of players.
+    // Updates are sent with a timeout, unless the number is specified.
+    function notifyNP(np) {
+        if ('number' === typeof np) {
+            node.say('PLAYERSCONNECTED', 'ROOM', np);
+        }
+        else if (!node.game.notifyTimeout) {
+            // Group together a few connect-notifications
+            // before sending them.
+            node.game.notifyTimeout = setTimeout(function() {
+                // Delete timeout.
+                node.game.notifyTimeout = null;
+                // Notify all players of new connection/s.
+                node.say('PLAYERSCONNECTED', 'ROOM',
+                         node.game.pl.size());
+            }, 200);
         }
     }
 
@@ -109,24 +126,14 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
             // Wait for all players to connect.
             if (nPlayers < waitRoom.POOL_SIZE) {
-
-                if (!node.game.notifyTimeout) {
-                    // Group together a few connect-notifications
-                    // before sending them.
-                    node.game.notifyTimeout = setTimeout(function() {
-                        // Delete timeout.
-                        node.game.notifyTimeout = null;
-                        // Notify all players of new connection/s.
-                        node.say('PLAYERSCONNECTED', 'ROOM',
-                                 node.game.pl.size());
-                    }, 200);
-                }
+                notifyNP();
             }
             // Prepare to dispatch!
             else {
 
                 // Send immediately the number of players notification.
-                node.say('PLAYERSCONNECTED', 'ROOM', nPlayers);
+                notifyNP(nPlayers);
+
                 if (node.game.notifyTimeout) {
                     node.game.notifyTimeout = null;
                     clearTimeout(node.game.notifyTimeout);
@@ -138,18 +145,16 @@ module.exports = function(settings, waitRoom, runtimeConf) {
                 // Dispatch immediately.
                 if (nPlayers === 1) {
                     waitRoom.dispatch({
-                        action: 'AllPlayersConnected',
-                        exit: 0
-                    }, n);
+                        numberOfGames: n
+                    });
                 }
                 // Timeout0: make sure other messages are sent
                 // (players can be disconnected by dispatch).
                 else {
                     setTimeout(function() {
                         waitRoom.dispatch({
-                            action: 'AllPlayersConnected',
-                            exit: 0
-                        }, n);
+                            numberOfGames: n
+                        });
                     });
                 }
             }
