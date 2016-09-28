@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.6.0
+- Added additional hooks (ON_CONNECT, ON_DISCONNECT, etc).
+
 ## 2.5.0
 - Optimized dispatching and notifying of new connections.
 - Avoiding sending messages to clients disconnected by dispatch.
