@@ -110,6 +110,38 @@ module.exports = {
     // outFile: 'my.imported.codes.csv',
 
     /**
+     * ## claimId
+     *
+     * If TRUE, remote clients will be able to claim an id via GET request
+     *
+     * Default: FALSE
+     */
+    // claimId: true,
+
+    /**
+     * ## claimIdValidateRequest
+     *
+     * Returns TRUE if a requester is authorized to claim an id
+     *
+     * Returns an error string describing the error otherwise.
+     *
+     * Default: undefined
+     */
+    // claimIdValidateRequest: function(query, headers) {
+    //    // Check query and headers.
+    //    return true;
+    //},
+
+    /**
+     * ## claimIdPostProcess
+     *
+     * Manipulates the client object after the claim id process succeeded
+     */
+    //claimIdPostProcess: function(code, query, headers) {
+    //    code.WorkerId = query.id;
+    //}
+
+    /**
      * ## importer
      *
      * Importer function processing the different import modes
