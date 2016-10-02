@@ -28,7 +28,7 @@ module.exports = {
     maxExecTime: 6000,
 
     /**
-     * ## maxExecTime
+     * ## speedTest
      *
      * If set, client must exchange messages with server "quickly enough"
      */
@@ -50,9 +50,9 @@ module.exports = {
 //     },
 
    /**
-     * ## viewportSize
+     * ## browserDetect
      *
-     * If set, client must have a resolution between the min and max specified
+     * Checks the browser and device
      *
      * Available options (more will be added):
      *
