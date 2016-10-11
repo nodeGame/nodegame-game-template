@@ -124,6 +124,43 @@ module.exports = {
      */
     enableReconnections: true,
 
+    /**
+     * ### sameStepReconnectionOnly (boolean) Optional
+     *
+     * If TRUE, only reconnections in the same game step are allowed.
+     *
+     * Default: FALSE
+     */
+    // sameStepReconnectionOnly: false,
+
+    /**
+     * ### disposeFailedReconnections (boolean) Optional
+     *
+     * If TRUE, failed reconnections are disposed
+     *
+     * If FALSE, failed reconnections are treated as a new connection.
+     *
+     * A reconnection can fail for the following reasones:
+     *
+     * - Parameter `enabledReconnections` is FALSE.
+     * - Parameter `sameStepReconnectionOnly` is TRUE, and the
+     *      client's stage and the logic's stage are different.
+     * - The room in which the client was at the moment of
+     *      disconnection cannot be located.
+     * - Any other error.
+     *
+     * Default: FALSE
+     */
+    // disposeFailedReconnections: true,
+
+    /**
+     * ### cacheMaxAge (number) Optional
+     *
+     * The duration in ms of the browser cache for public/ resources
+     *
+     * Default: 0 (no cache)
+     */
+    // cacheMaxAge: 360000,
 
     /**
      * ### sioQuery (boolean) Optional
