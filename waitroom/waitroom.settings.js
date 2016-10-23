@@ -202,6 +202,29 @@ module.exports = {
     // PING_BEFORE_DISPATCH: true,
 
     /**
+     * ## PING_MAX_REPLY_TIME (number > 0) Optional
+     *
+     * The number of milliseconds to wait for a reply from a PING
+     *
+     * Default: 3000
+     *
+     * @see PING_BEFORE_DISPATCH
+     */
+    // PING_MAX_REPLY_TIME: 3000,
+
+    /**
+     * ## PING_DISPATCH_ANYWAY (boolean) Optional
+     *
+     * If TRUE, dispatch continues even if disconnections occur during PING
+     *
+     * Default: FALSE
+     *
+     * @see PING_BEFORE_DISPATCH
+     * @see PING_MAX_REPLY_TIME
+     */
+    // PING_DISPATCH_ANYWAY: false,
+
+    /**
      * ## logicPath (string) Optional
      *
      * If set, a custom implementation of the wait room will be used
