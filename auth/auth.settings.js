@@ -141,29 +141,8 @@ module.exports = {
     //    code.WorkerId = query.id;
     //}
 
-    /**
-     * ## importer
-     *
-     * Importer function processing the different import modes
-     *
-     * Must export a function that returns an array of codes synchronously
-     * or asynchronously.
-     *
-     * Modes: 'dummy', 'auto', 'local', 'remote', 'custom'
-     */
-    // codes: 'auth.codes.js',
-
     // # Reserved words for future requirements settings.
 
     // page: 'login.htm'
-
-    /**
-     * ## getcode
-     *
-     * function that returns true or a string with the error. ??
-     *
-     * @xperimental
-     */
-    getcode: true,
 
 };

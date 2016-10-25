@@ -170,6 +170,82 @@ module.exports = {
     // }
 
     /**
+     * ## ON_OPEN (function) Optional
+     *
+     * Callback to be executed when the waiting room becomes "open"
+     *
+     * Receives as first parameter the waiting room object itself.
+     */
+    this.ON_OPEN = null;
+
+    /**
+     * ### WaitingRoom.ON_CLOSE (function) Optional
+     *
+     * Callback to be executed when the waiting room becomes "close"
+     *
+     * Receives as first parameter the waiting room object itself.
+     */
+    this.ON_CLOSE = null;
+
+    /**
+     * ## ON_CONNECT (function) Optional
+     *
+     * Callback to be executed when a player connects
+     *
+     * Receives as first parameter the waiting room object itself.
+     */
+    this.ON_CONNECT = null;
+
+    /**
+     * ## ON_DISCONNECT (function) Optional
+     *
+     * Callback to be executed when a player disconnects
+     *
+     * Receives as first parameter the waiting room object itself.
+     */
+    this.ON_DISCONNECT = null;
+
+    /**
+     * ## ON_INIT (function) Optional
+     *
+     * Callback to be executed after the settings have been parsed
+     *
+     * Receives as first parameter the waiting room object itself.
+     */
+    this.ON_INIT = null;
+
+    /**
+     * ## ON_DISPATCH (function) Optional
+     *
+     * Callback to be executed just before starting dispatching
+     *
+     * Receives as first parameter the waiting room object itself,
+     * and the options of the dispatch call as second parameter.
+     */
+    this.ON_DISPATCH = null;
+
+    /**
+     * ## ON_DISPATCHED (function) Optional
+     *
+     * Callback to be executed at the end of a dispatch call
+     *
+     * Receives as first parameter the waiting room object itself,
+     * and the options of the dispatch call as second parameter.
+     */
+    this.ON_DISPATCHED = null;
+
+    /**
+     * ## ON_FAILED_DISPATCH (function) Optional
+     *
+     * Callback to be executed if a dispatch attempt failed
+     *
+     * Receives as first parameter the waiting room object itself,
+     * the options of the dispatch call as second parameter, and
+     * optionally the error message as third parameter.
+     */
+    this.ON_FAILED_DISPATCH = null;
+
+    /**
      * ## DISPATCH_TO_SAME_ROOM (boolean) Optional
      *
      * If TRUE, every new group will be added to the same game room
