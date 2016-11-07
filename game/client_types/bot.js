@@ -7,7 +7,7 @@
  * ---
  */
 
-module.exports = function(game, settings, treatmentName, gameRoom) {
+module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     // Must implement the stages here.
 

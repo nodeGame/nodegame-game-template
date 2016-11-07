@@ -40,7 +40,7 @@ module.exports = {
      *
      * If set, waits until POOL_SIZE clients are connected to dispatch a group
      *
-     * Must be >= POOL_SIZE.
+     * Must be >= GROUP_SIZE.
      *
      * Default: GROUP_SIZE
      */
