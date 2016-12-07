@@ -23,22 +23,49 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager = ngc.getStager(game.plot);
 
     stager.extendAllSteps(function(o) {
-        o._cb = o.cb;
-        o.cb = function() {
-            var _cb, stepObj, id;
-            stepObj = this.getCurrentStepObj();
-            // Invoking original callback.
-            _cb = stepObj._cb;
-            _cb.call(this);
+        var role;
+        if (o.roles) {
+            o._roles = {};
+            for (role in o.roles) {
+                if (o.roles.hasOwnProperty(role)) {
+                    // Copy only cb property.
+                    o._roles[role] = o.roles[role].cb;
+                    // Make a new one.
+                    o.roles[role].cb = function() {
+                        var _cb, stepObj, id;
+                        stepObj = this.getCurrentStepObj();
+                        id = stepObj.id
 
-            id = stepObj.id
+                        _cb = stepObj._roles[this.role];
+                        _cb.call(this);
 
-            // TODO: Adapt to specific steps.
-            // if (id === XXX) ...
+                        if ((this.role === 'DICTATOR' && id === 'game')) {
+                            node.on('PLAYING', function() {
+                                node.timer.randomExec(function() {
+                                    node.game.timer.doTimeUp();
+                                });
+                            });
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            o._cb = o.cb;
+            o.cb = function() {
+                var _cb, stepObj, id;
+                stepObj = this.getCurrentStepObj();
+                id = stepObj.id
 
-            node.timer.randomDone(2000);
+                _cb = stepObj._cb;
+                _cb.call(this);
 
-        };
+                // TODO: Adapt to specific steps.
+                // if (id === XXX) ...
+
+                node.timer.randomDone(2000);
+            };
+        }
         return o;
     });
 
