@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## current
+- Using new ROLES API.
+
 ## 3.2.2
 - Updated doc in waiting room.
 - Updated parameters in function declaration in bot.js and phantom.js
