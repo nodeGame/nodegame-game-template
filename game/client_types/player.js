@@ -85,9 +85,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         }
                         button.disabled = true;
 
-                        // Send the decision to the other player.
-                        node.say('decision', node.game.partner, decision);
-
                         // Mark the end of the round, and
                         // store the decision in the server.
                         node.done({ offer: decision });

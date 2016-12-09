@@ -29,7 +29,7 @@ module.exports = {
      * spawn game room. The session id is saved in each entry in the
      * memory database of the logics, and used as the name of the
      * session folder in the data/ directory.
-     */ 
+     */
     SESSION_ID: 1,
 
     /**
@@ -46,8 +46,12 @@ module.exports = {
 
     // # Game specific properties
 
-    // Numnber of game rounds repetitions.
+    // Number of game rounds repetitions.
     REPEAT: 4,
+
+    // In case an incoming offer does not pass validation, which indicates
+    // cheating, re-set the dictator's offer to this value.
+    defaultOffer: 100,
 
     // # Treatments definition.
 
