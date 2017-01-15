@@ -139,7 +139,18 @@ module.exports = {
      */
     //claimIdPostProcess: function(code, query, headers) {
     //    code.WorkerId = query.id;
-    //}
+    //},
+
+    /**
+     * ## codes
+     *
+     * Path to the code generator file
+     *
+     * The file must export a function that takes current settings
+     * (e.g. mode, etc.) and returns synchronously or asynchronously
+     * an array of valid authorization codes.
+     */
+    //codes: 'path/to/code/generator.js',
 
     // # Reserved words for future requirements settings.
 
