@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 3.5.1
+Updated auth.settings.js file.
+
 ## 3.5.0
 - Using new ROLES API.
 
