@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 3.5.2
+Importing auth codes also from .js files.
+
 ## 3.5.1
 Updated auth.settings.js file.
 
