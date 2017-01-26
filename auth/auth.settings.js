@@ -83,7 +83,7 @@ module.exports = {
      * Available formats: .csv and .json.
      *
      * Modes: 'local'
-     * Default: 'codes.json', 'code.csv' (tried in sequence)
+     * Default: 'codes.json', 'codes.js', 'code.csv' (tried in sequence)
      */
     inFile: 'codes.imported.csv',
 
