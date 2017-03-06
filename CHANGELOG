@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 3.5.3
+Printing out if a channel is default.
+
 ## 3.5.2
 Importing auth codes also from .js files.
 
