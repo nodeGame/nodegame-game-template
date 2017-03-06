@@ -117,7 +117,10 @@ module.exports = function(settings, room, runtimeConf) {
     stager.next({
         id: 'requirements',
         cb: function() {
-            console.log('Requirements room created: ' + channel.name);
+            var str;
+            str = 'Requirements room created: ' + channel.name;
+            if (channel.defaultChannel) str += ' (**Default**)';
+            console.log(str);
         }
     });
 
