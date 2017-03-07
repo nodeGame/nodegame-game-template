@@ -3,10 +3,10 @@
  * Copyright(c) {YEAR} {AUTHOR} <{AUTHOR_EMAIL}>
  * MIT Licensed
  *
- * The file includes settings for the nodeGame client instance
+ * This file includes settings that are shared amongst all client types
  *
- * This settings are then used to call `node.setup('nodegame')` and its
- * remote version.
+ * Setup settings are passed by reference and can be modified globally
+ * by any instance executing on the server (but not by remote instances).
  *
  * http://www.nodegame.org
  * ---
