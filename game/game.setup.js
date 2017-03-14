@@ -13,12 +13,8 @@
  */
 module.exports = function(settings, stages) {
 
-    var setup = {};
-
-    //auto: true = automatic run, auto: false = user input
-    setup.env = {
-        auto: false
-    };
+    var setup;
+    setup = {};
 
     setup.debug = true;
 
@@ -26,13 +22,23 @@ module.exports = function(settings, stages) {
 
     setup.window = {
         promptOnleave: !setup.debug
-    }
+    };
 
-    // Metadata. Taken from package.json. Can be overwritten.
+    // Metadata.
+    // By default are as in package.json, but can be overwritten.
+    //
     // setup.metadata = {
     //    name: 'another name',
     //    version: 'another version',
     //    description: 'another descr'
+    // };
+
+    // Environment variables. Can be retrieved via `node.env('foo')`,
+    // or be used to conditionally execute a function:
+    // `node.env('foo', function(foo) { ... })`.
+    //
+    // setup.env = {
+    //    foo: false
     // };
 
     return setup;
