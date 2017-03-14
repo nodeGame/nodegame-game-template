@@ -1,13 +1,16 @@
 # CHANGELOG
 
+## 3.5.4
+- Minor documentation in game.setup.js.
+
 ## 3.5.3
-Printing out if a channel is default.
+- Printing out if a channel is default.
 
 ## 3.5.2
-Importing auth codes also from .js files.
+- Importing auth codes also from .js files.
 
 ## 3.5.1
-Updated auth.settings.js file.
+- Updated auth.settings.js file.
 
 ## 3.5.0
 - Using new ROLES API.
