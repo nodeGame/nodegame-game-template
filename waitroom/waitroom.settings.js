@@ -313,6 +313,20 @@ module.exports = {
      * ## DISCONNECT_IF_NOT_SELECTED (boolean) Optional
      *
      * Disconnect a client if not selected for a game when dispatching
+     *
+     * Default: false
      */
-    DISCONNECT_IF_NOT_SELECTED: false
+    // DISCONNECT_IF_NOT_SELECTED: true,
+
+    /**
+     * ## DISPATCH_SOUND (boolean|string) Optional
+     *
+     * Plays a sound to notify players that a game is about to be dispatched
+     *
+     * If TRUE, plays default sound, if string plays the file sound
+     * located at the specified uri
+     *
+     * Default: true|'/sounds/doorbell.ogg'
+     */
+    // DISPATCH_SOUND: true
 };

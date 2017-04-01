@@ -77,6 +77,10 @@ module.exports = function(settings, waitRoom, runtimeConf) {
             pList = waitRoom.clients.player;
             nPlayers = pList.size();
 
+            // Prepare config to send to client.
+            widgetConfig = waitRoom.getWidgetConfig();
+            
+            // Get the right wait-time.
             if (waitRoom.START_DATE) {
                 waitTime = new Date(waitRoom.START_DATE).getTime() -
                     (new Date().getTime());
@@ -87,10 +91,9 @@ module.exports = function(settings, waitRoom, runtimeConf) {
             else {
                 waitTime = null; // Widget won't start timer.
             }
-
-            // Send the number of minutes to wait and all waitRoom settings.
-            widgetConfig = waitRoom.makeWidgetConfig();
             widgetConfig.waitTime = waitTime;
+            
+            // Send config to client.
             node.remoteSetup('waitroom', p.id, widgetConfig);
 
             console.log('NPL ', nPlayers);
