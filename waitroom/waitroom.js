@@ -28,8 +28,6 @@ module.exports = function(settings, waitRoom, runtimeConf) {
     }
 
     function clientDisconnects(p) {
-        var wRoom, i;
-
         // Clear timeout in any case.
         waitRoom.clearTimeOut(p.id);
 
