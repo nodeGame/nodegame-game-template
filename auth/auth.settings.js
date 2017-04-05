@@ -137,8 +137,22 @@ module.exports = {
      *
      * Manipulates the client object after the claim id process succeeded
      */
-    //claimIdPostProcess: function(code, query, headers) {
-    //    code.WorkerId = query.id;
+    //claimIdPostProcess: function(clientObj, query, headers) {
+    //    clientObj.WorkerId = query.id;
+    //},
+
+    /**
+     * ## claimIdModifyReply
+     *
+     * Manipulates the object sent back to the client
+     *
+     * @experimental
+     * @v4
+     */
+    //claimIdModifyReply: function(reply) {
+    //    In case of success tell the client the name of the host
+    //    where the game is. Default: same host.
+    //    if (reply.code) reply.host = 'http://myhost.com';
     //},
 
     /**
