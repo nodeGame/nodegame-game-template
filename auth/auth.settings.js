@@ -149,7 +149,7 @@ module.exports = {
      * @experimental
      * @v4
      */
-    //claimIdModifyReply: function(reply) {
+    //claimIdModifyReply: function(reply, clientObj) {
     //    In case of success tell the client the name of the host
     //    where the game is. Default: same host.
     //    if (reply.code) reply.host = 'http://myhost.com';
