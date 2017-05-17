@@ -7,7 +7,10 @@
  * ---
  */
 window.onload = function() {
-    var node = parent.node;
+    if ('undefined' === typeof node) {
+        throw new Error('node is not loaded. Aborting.');
+    }
+
     // All these properties will be overwritten
     // by remoteSetup from server.
     node.setup('nodegame', {
