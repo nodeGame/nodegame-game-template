@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 3.5.5
+- Fixed `parent.node` reference in `index.js`.
+
 ## 3.5.4
 - Minor documentation in game.setup.js.
 
