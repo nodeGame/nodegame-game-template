@@ -63,7 +63,12 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
         node.remoteSetup('widgets', p.id, {
             destroyAll: true,
-            append: { 'WaitingRoom': {} }
+            append: {
+                'WaitingRoom': {
+                    texts: waitRoom.TEXTS,
+                    sounds: waitRoom.SOUNDS
+                }
+            }
         });
 
         if (waitRoom.isRoomOpen()) {
