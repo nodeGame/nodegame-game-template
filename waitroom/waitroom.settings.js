@@ -328,5 +328,17 @@ module.exports = {
      *
      * Default: true|'/sounds/doorbell.ogg'
      */
-    // DISPATCH_SOUND: true
+    // DISPATCH_SOUND: true,
+
+    /**
+     * ## PAGE_TITLE (object) Optional
+     *
+     * Sets the page title, optionally adds to page
+     *
+     * An object containing the title, and a flag if the same text should
+     * be added in a H1 element at the top of the page.
+     *
+     * Default: { title: 'Welcome!', addToBody: true }
+     */
+    // PAGE_TITLE: { title: 'Welcome!', addToBody: true }
 };

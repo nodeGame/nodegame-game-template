@@ -58,7 +58,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
         node.remoteSetup('page', p.id, {
             clearBody: true,
-            title: { title: 'Welcome!', addToBody: true }
+            title: waitRoom.TITLE
         });
 
         node.remoteSetup('widgets', p.id, {
@@ -82,7 +82,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
             // Prepare config to send to client.
             widgetConfig = waitRoom.getWidgetConfig();
-            
+
             // Get the right wait-time.
             if (waitRoom.START_DATE) {
                 waitTime = new Date(waitRoom.START_DATE).getTime() -
@@ -95,7 +95,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
                 waitTime = null; // Widget won't start timer.
             }
             widgetConfig.waitTime = waitTime;
-            
+
             // Send config to client.
             node.remoteSetup('waitroom', p.id, widgetConfig);
 
