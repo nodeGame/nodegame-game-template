@@ -81,7 +81,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
             nPlayers = pList.size();
 
             // Prepare config to send to client.
-            widgetConfig = waitRoom.getWidgetConfig();
+            widgetConfig = waitRoom.makeWidgetConfig();
 
             // Get the right wait-time.
             if (waitRoom.START_DATE) {
