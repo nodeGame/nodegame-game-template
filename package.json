@@ -1,12 +1,16 @@
 {
     "name": "nodegame-game-template"
-  , "description": "Template files for a standard nodeGame game"
-  , "version": "3.5.4"
-  , "homepage": "http://nodegame.org"
-  , "keywords": ["nodegame", "template", "game"]
-  , "author": "Stefano Balietti <futur.dorko@gmail.com>"
-  , "contributors": [
+    , "description": "Template files for a standard nodeGame game"
+    , "version": "3.5.4"
+    , "homepage": "http://nodegame.org"
+    , "keywords": [ "nodegame", "template", "game" ]
+    , "author": "Stefano Balietti <futur.dorko@gmail.com>"
+    , "contributors": [
         { "name": "Stefano Balietti", "email": "futur.dorko@gmail.com" }
     ]
-  , "main": "index.js"
+    , "devDependencies": {
+        "mocha": ">= 0.3.0",
+        "should": "4.4.1"
+    }    
+    , "main": "index.js"
 }
