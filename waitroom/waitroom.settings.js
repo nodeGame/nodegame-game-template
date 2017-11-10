@@ -319,18 +319,6 @@ module.exports = {
     // DISCONNECT_IF_NOT_SELECTED: true,
 
     /**
-     * ## DISPATCH_SOUND (boolean|string) Optional
-     *
-     * Plays a sound to notify players that a game is about to be dispatched
-     *
-     * If TRUE, plays default sound, if string plays the file sound
-     * located at the specified uri
-     *
-     * Default: true|'/sounds/doorbell.ogg'
-     */
-    // DISPATCH_SOUND: true,
-
-    /**
      * ## PAGE_TITLE (object) Optional
      *
      * Sets the page title, optionally adds to page
@@ -340,5 +328,107 @@ module.exports = {
      *
      * Default: { title: 'Welcome!', addToBody: true }
      */
-    // PAGE_TITLE: { title: 'Welcome!', addToBody: true }
+    // PAGE_TITLE: { title: 'Welcome!', addToBody: true },
+
+    /** ### TEXTS
+     *
+     * Collections of texts displayed when given events occurs
+     *
+     * Each item can be a string, or function returning a string; the function
+     * receives two input parameters: the instance of the widget and an object
+     * with extra information (depending on the event).
+     *
+     * @see WaitingRoom.texts
+     */
+    TEXTS: {
+
+        /**
+         * #### blinkTitle
+         *
+         * Blinks the title of the tab to signal the beginning of the game
+         */
+        // blinkTitle: 'Custom string: Game Starts!',
+
+        /**
+         * #### disconnect
+         *
+         * Disconnected from waiting room
+         */
+        // disconnect: 'Custom string: YOU HAVE BEEN DISCONNECTED!',
+
+        /**
+         * #### waitedTooLong
+         *
+         * The MAX_WAIT_TIME countdown expired
+         */
+        // waitedTooLong: 'Custom string: YOU WAITED TOO LONG!',
+
+        /**
+         * #### notEnoughPlayers
+         *
+         * There are not enough players to start a game
+         */
+        // notEnoughPlayers: 'Custom string: NOT ENOUGH PLAYERS!',
+
+        /**
+         * #### notEnoughPlayers
+         *
+         * A player tries to connect, but the waiting room has been closed
+         */
+        // roomClosed: 'Custom string: ROOM CLOSED! CANNOT ENTER!',
+
+        /**
+         * #### notEnoughPlayers
+         *
+         * Currently there are more players than needed by the game
+         */
+        // tooManyPlayer: 'Custom string: TOO MANY PLAYERS!',
+
+        /**
+         * #### notSelectedClosed
+         *
+         * Player has not been selected, and cannot participate in other games
+         */
+        // notSelectedClosed: 'Custom string: NOT SELECTED CLOSED!',
+
+        /**
+         * #### notSelectedOpen
+         *
+         * Player has not been selected, but can still participate in new games
+         */
+        // notSelectedOpen: 'Custom string: NOT SELECTED OPEN!',
+
+
+        /**
+         * #### notSelectedOpen
+         *
+         * Player disconnected, and an exit code might have been provided
+         */
+        // exitCode: 'Custom string: EXIT CODE TEXT',
+    },
+
+    /** ### TEXTS
+     *
+     * Collections of sounds played when given events occurs
+     *
+     * Each item can be a string, or function returning a string; the function
+     * receives two input parameters: the instance of the widget and an object
+     * with extra information (depending on the event).
+     *
+     * @see WaitingRoom.sounds
+     */
+    SOUND: {
+
+        /**
+         * ## dispatch
+         *
+         * Notifies players that a game is about to be dispatched
+         *
+         * If TRUE, plays default sound, if string plays the file sound
+         * located at the specified uri
+         *
+         */
+        // dispatch: false
+    }
+
 };
