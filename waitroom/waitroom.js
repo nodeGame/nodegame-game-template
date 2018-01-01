@@ -51,25 +51,29 @@ module.exports = function(settings, waitRoom, runtimeConf) {
         var waitTime;
         var widgetConfig;
         var n;
-
-        // TODO: send only one message?
+        var isBot;
 
         node.remoteCommand('stop', p.id);
 
-        node.remoteSetup('page', p.id, {
-            clearBody: true,
-            title: waitRoom.TITLE
-        });
+        isBot = p.clientType === 'bot';
 
-        node.remoteSetup('widgets', p.id, {
-            destroyAll: true,
-            append: {
-                'WaitingRoom': {
-                    texts: waitRoom.TEXTS,
-                    sounds: waitRoom.SOUNDS
+        if (!isBot) {
+
+            // TODO: send only one message?
+            node.remoteSetup('page', p.id, {
+                clearBody: true,
+                title: waitRoom.TITLE
+            });
+            node.remoteSetup('widgets', p.id, {
+                destroyAll: true,
+                append: {
+                    'WaitingRoom': {
+                        texts: waitRoom.TEXTS,
+                        sounds: waitRoom.SOUNDS
+                    }
                 }
-            }
-        });
+            });
+        }
 
         if (waitRoom.isRoomOpen()) {
             console.log('Client connected to waiting room: ', p.id);
@@ -80,30 +84,33 @@ module.exports = function(settings, waitRoom, runtimeConf) {
             pList = waitRoom.clients.player;
             nPlayers = pList.size();
 
-            // Prepare config to send to client.
-            widgetConfig = waitRoom.makeWidgetConfig();
+            if (!isBot) {
+                // Prepare config to send to client.
+                widgetConfig = waitRoom.makeWidgetConfig();
 
-            // Get the right wait-time.
-            if (waitRoom.START_DATE) {
-                waitTime = new Date(waitRoom.START_DATE).getTime() -
-                    (new Date().getTime());
-            }
-            else if (waitRoom.MAX_WAIT_TIME) {
-                waitTime = waitRoom.MAX_WAIT_TIME;
-            }
-            else {
-                waitTime = null; // Widget won't start timer.
-            }
-            widgetConfig.waitTime = waitTime;
+                // Get the right wait-time.
+                if (waitRoom.START_DATE) {
+                    waitTime = new Date(waitRoom.START_DATE).getTime() -
+                        (new Date().getTime());
+                }
+                else if (waitRoom.MAX_WAIT_TIME) {
+                    waitTime = waitRoom.MAX_WAIT_TIME;
+                }
+                else {
+                    waitTime = null; // Widget won't start timer.
+                }
+                widgetConfig.waitTime = waitTime;
 
-            // Send config to client.
-            node.remoteSetup('waitroom', p.id, widgetConfig);
+                // Send config to client.
+                node.remoteSetup('waitroom', p.id, widgetConfig);
+            }
 
             console.log('NPL ', nPlayers);
 
             // Call ON_CONNECT, if found.
             if (waitRoom.ON_CONNECT) waitRoom.ON_CONNECT(waitRoom, p);
 
+            // TODO: do Bots have timeouts?
             // Start counting a timeout for max stay in waiting room.
             waitRoom.makeTimeOut(p.id, waitTime);
 
