@@ -58,7 +58,6 @@ module.exports = function(settings, waitRoom, runtimeConf) {
         isBot = p.clientType === 'bot';
 
         if (!isBot) {
-
             // TODO: send only one message?
             node.remoteSetup('page', p.id, {
                 clearBody: true,
@@ -110,9 +109,11 @@ module.exports = function(settings, waitRoom, runtimeConf) {
             // Call ON_CONNECT, if found.
             if (waitRoom.ON_CONNECT) waitRoom.ON_CONNECT(waitRoom, p);
 
-            // TODO: do Bots have timeouts?
-            // Start counting a timeout for max stay in waiting room.
-            waitRoom.makeTimeOut(p.id, waitTime);
+            if (waitTime) {
+                // TODO: do Bots have timeouts?
+                // Start counting a timeout for max stay in waiting room.
+                waitRoom.makeTimeOut(p.id, waitTime);
+            }
 
             // In TIMEOUT mode it does not matter how many players we have.
             // Dispatch will happen at a certain time in the future.
