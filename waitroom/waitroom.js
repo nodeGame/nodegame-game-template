@@ -61,7 +61,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
             // TODO: send only one message?
             node.remoteSetup('page', p.id, {
                 clearBody: true,
-                title: waitRoom.TITLE
+                title: waitRoom.PAGE_TITLE
             });
             node.remoteSetup('widgets', p.id, {
                 destroyAll: true,
