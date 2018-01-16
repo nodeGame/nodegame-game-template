@@ -63,6 +63,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
                 clearBody: true,
                 title: waitRoom.PAGE_TITLE
             });
+
             node.remoteSetup('widgets', p.id, {
                 destroyAll: true,
                 append: {
