@@ -346,6 +346,8 @@ module.exports = {
          * #### blinkTitle
          *
          * Blinks the title of the tab to signal the beginning of the game
+         *
+         * False will not blink.
          */
         // blinkTitle: 'Custom string: Game Starts!',
 
@@ -429,6 +431,15 @@ module.exports = {
          *
          */
         // dispatch: false
-    }
+    },
+
+    /** ### ALLOW_PLAY_WITH_BOTS
+     *
+     * Allows a player to request to start the game immediately with bots
+     *
+     * A button is added to the interface
+     */
+    // ALLOW_PLAY_WITH_BOTS: true
+
 
 };
