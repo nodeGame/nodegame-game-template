@@ -1,4 +1,4 @@
-# Template for a nodeGame game.
+# Template for a nodeGame game
 
 [![Build Status](https://travis-ci.org/nodeGame/nodegame-game-template.png?branch=master)](https://travis-ci.org/nodeGame/nodegame-game-template)
 
