@@ -237,7 +237,6 @@ module.exports = {
      * For example, if `roomCounterChars` is equal to 6 and
      * the current roomCounter value is 123, then room name is: '000123'.
      *
-     *
      * Default: 6
      */
     // roomCounterPadChars: 6

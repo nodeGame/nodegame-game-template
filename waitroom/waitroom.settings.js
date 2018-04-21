@@ -373,18 +373,18 @@ module.exports = {
         // notEnoughPlayers: 'Custom string: NOT ENOUGH PLAYERS!',
 
         /**
-         * #### notEnoughPlayers
+         * #### roomClosed
          *
          * A player tries to connect, but the waiting room has been closed
          */
         // roomClosed: 'Custom string: ROOM CLOSED! CANNOT ENTER!',
 
         /**
-         * #### notEnoughPlayers
+         * #### tooManyPlayers
          *
          * Currently there are more players than needed by the game
          */
-        // tooManyPlayer: 'Custom string: TOO MANY PLAYERS!',
+        // tooManyPlayers: 'Custom string: TOO MANY PLAYERS!',
 
         /**
          * #### notSelectedClosed
@@ -400,16 +400,15 @@ module.exports = {
          */
         // notSelectedOpen: 'Custom string: NOT SELECTED OPEN!',
 
-
         /**
-         * #### notSelectedOpen
+         * #### exitCode
          *
          * Player disconnected, and an exit code might have been provided
          */
         // exitCode: 'Custom string: EXIT CODE TEXT',
     },
 
-    /** ### TEXTS
+    /** ### SOUNDS
      *
      * Collections of sounds played when given events occurs
      *
