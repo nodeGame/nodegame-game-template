@@ -59,7 +59,7 @@ module.exports = {
      */
     playerServer: {
 
-        // endpoint: '{NAME}',
+        endpoint: '{NAME}',
 
 
         // Anti-spoofing, extra check to see if msg.from matches socket.id
