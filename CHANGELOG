@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 4.1.0
+- Added support for antiSpoofing option in playerServer.
+
+## 4.0.0
+- Ported to nodeGame 4.x.
+
 ## 3.5.5
 - Fixed `parent.node` reference in `index.js`.
 
