@@ -40,7 +40,7 @@ module.exports = {
      * Here you can add aliases to enable urls like: `http://myserver/alias/`.
      *
      * Important! `node.connect()` in `public/js/index.js` still needs
-     * to use the real channel name, so you might need to pass it explicitly:
+     * to use the real channel name, so you will need to pass it explicitly:
      * `node.connect('/gameName').
      */
     // alias: [],
@@ -57,7 +57,17 @@ module.exports = {
      *
      * Default: name-of-the-channel
      */
-    // playerServer: '{NAME}',
+    playerServer: {
+
+        // endpoint: '{NAME}',
+
+
+        // Anti-spoofing, extra check to see if msg.from matches socket.id
+        // on SocketIo socket connections. Spoofed messages are logged
+        // normally, and an additional log entry with id and from msg is added.
+        // Disable only if you need that extra bit of speed.
+        antiSpoofing: true
+    },
 
     /**
      * ## adminServer (object|string) Optional
