@@ -20,9 +20,9 @@ module.exports = {
      *
      * Available modes:
      *
-     *   - Â´TIMEOUTÂ´, waits until the time is up, then it checks
+     *   - ´TIMEOUT´, waits until the time is up, then it checks
      *        whether enough players are connected to start the game.
-     *   - Â´WAIT_FOR_N_PLAYERSÂ´, the game starts right away as soon as
+     *   - ´WAIT_FOR_N_PLAYERS´, the game starts right away as soon as
      *        the desired number of connected players is reached.
      */
     // EXECUTION_MODE: 'TIMEOUT',
