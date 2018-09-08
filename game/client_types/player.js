@@ -15,8 +15,6 @@
 
 module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
-    var game;
-
     stager.setOnInit(function() {
 
         // Initialize the client.
