@@ -13,11 +13,6 @@
 
 "use strict";
 
-var ngc = require('nodegame-client');
-var stepRules = ngc.stepRules;
-var constants = ngc.constants;
-var publishLevels = constants.publishLevels;
-
 module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     var game;
@@ -35,7 +30,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         this.randomOffer = function(offer, submitOffer) {
             var n;
-            n = JSUS.randomInt(-1,100);
+            n = J.randomInt(-1,100);
             offer.value = n;
             submitOffer.click();
         };
@@ -45,7 +40,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         frame = W.generateFrame();
 
         // Add widgets.
-        this.visualRound = node.widgets.append('VisualRound', header);
+        this.visualRound = node.widgets.append('VisualRound', header, {
+            title: false
+        });
         this.visualTimer = node.widgets.append('VisualTimer', header);
 
         this.doneButton = node.widgets.append('DoneButton', header);
@@ -125,8 +122,4 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             node.game.visualTimer.setToZero();
         }
     });
-
-    game = setup;
-    game.plot = stager.getState();
-    return game;
 };

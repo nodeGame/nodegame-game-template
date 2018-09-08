@@ -10,10 +10,7 @@
 "use strict";
 
 var ngc = require('nodegame-client');
-var stepRules = ngc.stepRules;
-var constants = ngc.constants;
 var J = ngc.JSUS;
-var counter = 0;
 
 module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
@@ -22,11 +19,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     // Must implement the stages here.
 
-    // Increment counter.
-    counter = counter ? ++counter : settings.SESSION_ID || 1;
-
     stager.setOnInit(function() {
-
         // Initialize the client.
     });
 
@@ -70,23 +63,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('end', {
         cb: function() {
-            node.game.memory.save(channel.getGameDir() + 'data/data_' +
-                                  node.nodename + '.json');
+            node.game.memory.save('data.json');
         }
     });
 
     stager.setOnGameOver(function() {
-
         // Something to do.
-
     });
-
-    // Here we group together the definition of the game logic.
-    return {
-        nodename: 'lgc' + counter,
-        // Extracts, and compacts the game plot that we defined above.
-        plot: stager.getState(),
-
-    };
-
 };
