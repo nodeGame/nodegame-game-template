@@ -25,7 +25,6 @@ module.exports = {
      *   - ´WAIT_FOR_N_PLAYERS´, the game starts right away as soon as
      *        the desired number of connected players is reached.
      */
-    // EXECUTION_MODE: 'TIMEOUT',
     EXECUTION_MODE: 'WAIT_FOR_N_PLAYERS',
 
     /**
