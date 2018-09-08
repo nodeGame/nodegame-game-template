@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 4.1.1
+- Fixed HTML.
+
 ## 4.1.0
 - Added support for antiSpoofing option in playerServer.
 
