@@ -4,6 +4,10 @@
 
 Contains the directory structure of a dictator game implemented in nodeGame.
 
+## Use in nodeGame server
+
+NodeGame Server imports some files, e.g. wait and requirements room, as default ones. Changes applied here propagates to server.
+
 ## Resources
 
 - [nodeGame Documentation](https://github.com/nodeGame/nodegame/wiki)
