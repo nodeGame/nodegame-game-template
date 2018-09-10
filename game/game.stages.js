@@ -19,6 +19,4 @@ module.exports = function(stager, settings) {
 
     // Modify the stager to skip one stage.
     // stager.skip('instructions');
-
-    return stager.getState();
 };
