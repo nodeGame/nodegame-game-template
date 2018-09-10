@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 4.1.2
+- Centered error message.
+- Centered content.
+- Set max-width same as header max-width (42em).
+
 ## 4.1.1
 - Fixed HTML.
 

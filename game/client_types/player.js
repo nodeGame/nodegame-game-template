@@ -75,7 +75,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         decision = node.game.isValidBid(offer.value);
                         if ('number' !== typeof decision) {
                             W.writeln('Please enter a number between ' +
-                                      '0 and 100.');
+                                      '0 and 100.', 'dictator');
                             return;
                         }
                         button.disabled = true;
