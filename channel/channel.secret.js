@@ -12,7 +12,7 @@
  * ---
  */
 module.exports = function(settings, done) {
-    return 'this is a secret';
+    return '{SECRET}';
 
     // Example: return key asynchronously
 

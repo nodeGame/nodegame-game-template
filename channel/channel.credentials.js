@@ -14,8 +14,8 @@
 module.exports = function(settings, done) {
 
     return {
-        user: 'admin',
-        pwd: 'admin'
+        user: '{ADMIN}',
+        pwd: '{PWD}'
     };
 
     // Example: return key asynchronously
