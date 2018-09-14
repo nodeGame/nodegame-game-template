@@ -1,4 +1,6 @@
-# Game for nodeGame.
-{NAME} <{EMAIL}>
+# {NAME}
+{AUTHOR} <{EMAIL}>
 
-Description.
+## Description
+
+{DESCR}

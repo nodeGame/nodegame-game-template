@@ -1,9 +1,9 @@
 /**
  * # nodegame-game-template
- * Copyright(c) 2016 Stefano Balietti
+ * Copyright(c) 2018 Stefano Balietti
  * MIT Licensed
  *
- * Game files.
+ * Handles paths to game templates files.
  *
  * http://www.nodegame.org
  */
@@ -13,11 +13,15 @@ var path = require('path');
 // Return the required template.
 exports.require = function(file) {
     if (file === 'package.json') file = 'package.template.json';
+    else if (file === 'LICENSE') file = 'LICENSE.template';
+    else if (file === 'README.md') file = 'README.template.md';
     return require(path.resolve(__dirname, file));
 };
 
 // Return the path to the required template.
 exports.resolve = function(file) {
     if (file === 'package.json') file = 'package.template.json';
+    else if (file === 'LICENSE') file = 'LICENSE.template';
+    else if (file === 'README.md') file = 'README.template.md';
     return path.resolve(__dirname, file);
 };
