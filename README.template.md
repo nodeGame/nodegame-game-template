@@ -4,3 +4,7 @@
 ## Description
 
 {DESCR}
+
+## License
+
+[MIT](LICENSE)
