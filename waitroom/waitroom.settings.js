@@ -50,8 +50,7 @@ module.exports = {
      *
      * Number of games to dispatch
      *
-     * If set, the waiting room will be closed after N_GAMES have
-     * been dispatched
+     * If set, waiting room will be closed after N_GAMES have been dispatched
      *
      * Default: undefined, no limit.
      */
