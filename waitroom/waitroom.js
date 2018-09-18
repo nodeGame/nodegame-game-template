@@ -121,7 +121,9 @@ module.exports = function(settings, waitRoom, runtimeConf) {
             if (waitRoom.EXECUTION_MODE !== 'WAIT_FOR_N_PLAYERS') return;
 
             // Wait for all players to connect.
-            if (nPlayers < waitRoom.POOL_SIZE) {
+            if ((nPlayers < waitRoom.POOL_SIZE) ||
+                (waitRoom.ALLOW_SELECT_TREATMENT && waitRoom.POOL_SIZE === 1)) {
+
                 waitRoom.notifyPlayerUpdate();
             }
             // Prepare to dispatch!
@@ -135,22 +137,15 @@ module.exports = function(settings, waitRoom, runtimeConf) {
                     clearTimeout(node.game.notifyTimeout);
                 }
 
-                // Number of games requested.
-                n = Math.floor(waitRoom.POOL_SIZE / waitRoom.GROUP_SIZE);
-
                 // Dispatch immediately.
                 if (nPlayers === 1) {
-                    waitRoom.dispatch({
-                        numberOfGames: n
-                    });
+                    waitRoom.dispatch();
                 }
                 // Timeout0: make sure other messages are sent
                 // (players can be disconnected by dispatch).
                 else {
                     setTimeout(function() {
-                        waitRoom.dispatch({
-                            numberOfGames: n
-                        });
+                        waitRoom.dispatch();
                     });
                 }
             }
