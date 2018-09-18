@@ -43,7 +43,7 @@ module.exports = {
      *
      * Default: GROUP_SIZE
      */
-    POOL_SIZE: 2,
+    // POOL_SIZE: 2,
 
     /**
      * ## N_GAMES (number) Optional
@@ -90,7 +90,7 @@ module.exports = {
      *   - function: a callback returning the name of the treatment. E.g:
      *
      *       function(treatments, roomCounter) {
-     *           return treatments[num % treatments.length];
+     *           return treatments[roomCounter % treatments.length];
      *       }
      *
      * Default: undefined, random treatment
@@ -425,7 +425,7 @@ module.exports = {
          * Notifies players that a game is about to be dispatched
          *
          * If TRUE, plays default sound, if string plays the file sound
-         * located at the specified uri
+         * located at the specified uri.
          *
          */
         // dispatch: false
@@ -435,9 +435,18 @@ module.exports = {
      *
      * Allows a player to request to start the game immediately with bots
      *
-     * A button is added to the interface
+     * A button is added to the interface.
      */
-    // ALLOW_PLAY_WITH_BOTS: true
+    // ALLOW_PLAY_WITH_BOTS: true,
 
+    /** ### ALLOW_SELECT_TREATMENT
+     *
+     * Allows a player to select the treatment for the game
+     *
+     * This option requires `ALLOW_PLAY_WITH_BOTS` to be TRUE.
+     *
+     * A button is added to the interface.
+     */
+    // ALLOW_SELECT_TREATMENT: true
 
 };
