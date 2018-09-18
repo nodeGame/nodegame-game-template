@@ -64,13 +64,11 @@ module.exports = {
     treatments: {
 
         standard: {
-            fullName: "Standard Treatment",
             description: "Longer time",
             bidTime: 30000
         },
 
         pressure: {
-            fullName: "Time Pressure Treatment",
             description: "Short times to take decisions",
             bidTime: 10000
         }
