@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 4.2.2
+- .gitignore.template added.
+
 ## 4.2.1
 - Added options for treatment selection.
 
