@@ -15,6 +15,7 @@ exports.require = function(file) {
     if (file === 'package.json') file = 'package.template.json';
     else if (file === 'LICENSE') file = 'LICENSE.template';
     else if (file === 'README.md') file = 'README.template.md';
+    else if (file === '.gitignore') file = '.gitignore.template';
     return require(path.resolve(__dirname, file));
 };
 
@@ -23,5 +24,6 @@ exports.resolve = function(file) {
     if (file === 'package.json') file = 'package.template.json';
     else if (file === 'LICENSE') file = 'LICENSE.template';
     else if (file === 'README.md') file = 'README.template.md';
+    else if (file === '.gitignore') file = '.gitignore.template';
     return path.resolve(__dirname, file);
 };
