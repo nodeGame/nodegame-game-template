@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## current
+- Removed unused option SESSION_ID from game.settings.
+
 ## 5.0.0
 - No changes.
 

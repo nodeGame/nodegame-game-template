@@ -21,18 +21,6 @@ module.exports = {
     // #nodeGame properties:
 
     /**
-     * ## SESSION_ID (number)
-     *
-     * The name of the first session of the channel
-     *
-     * The waiting room assigns sequential session ids to every newly
-     * spawn game room. The session id is saved in each entry in the
-     * memory database of the logics, and used as the name of the
-     * session folder in the data/ directory.
-     */
-    SESSION_ID: 1,
-
-    /**
      * ### TIMER (object) [nodegame-property]
      *
      * Maps the names of the steps of the game to timer durations
