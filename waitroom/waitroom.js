@@ -24,7 +24,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
     function clientReconnects(p) {
         channel.sysLogger.log('Reconnection in the waiting room.', p);
         node.game.pl.add(p);
-        clientConnects(p);
+        clientConnects(p, true);
     }
 
     function clientDisconnects(p) {
@@ -42,16 +42,32 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
         // Notify players that somebody disconnected.
         waitRoom.notifyPlayerUpdate();
+
+        if (settings.logConnections) {
+            str = Date.now() + ',"disconnect","' + p.id + '"';
+            if (p.WorkerId) str += ',"' + p.WorkerId + '"';
+            if (p.userAgent) str += ',"' + p.userAgent + '"';
+            waitRoom.log(str);
+        }
     }
 
     // Using self-calling function to put `firstTime` into closure.
-    function clientConnects(p) {
+    function clientConnects(p, recon) {
         var pList;
         var nPlayers;
         var waitTime;
         var widgetConfig;
         var n;
         var isBot;
+        var str;
+
+        if (settings.logConnections) {
+            str = Date.now() + ',"';
+            str += (recon ? 're' : '') + 'connect","' + p.id + '"';
+            if (p.WorkerId) str += ',"' + p.WorkerId + '"';
+            if (p.userAgent) str += ',"' + p.userAgent + '"';
+            waitRoom.log(str);
+        }
 
         node.remoteCommand('stop', p.id);
 

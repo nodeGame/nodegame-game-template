@@ -8,6 +8,7 @@
  * http://nodegame.org
  * ---
  */
+
 module.exports = function(settings, room, runtimeConf) {
     var node = room.node;
     var channel = room.channel;
@@ -38,25 +39,34 @@ module.exports = function(settings, room, runtimeConf) {
                             'or non-empty string. Found: ' + settings.nextRoom);
     }
 
-    function connectingPlayer(player) {
-        console.log('Player connected to Requirements room.', player.id);
+    function connectingPlayer(p, recon) {
+        var str;
+        console.log('Player connected to Requirements room.', p.id);
 
         setTimeout(function() {
 
-            node.remoteSetup('page', player.id, {
+            node.remoteSetup('page', p.id, {
                 clearBody: true,
                 title: { title: 'Welcome!', addToBody: true }
             });
 
-            node.remoteSetup('widgets', player.id, {
+            node.remoteSetup('widgets', p.id, {
                 append: { 'Requirements': {
                     root: 'widgets_div',
                     sayResults: true
                 } }
             });
-            node.remoteSetup('requirements', player.id, settings);
+            node.remoteSetup('requirements', p.id, settings);
 
         }, 500);
+
+        if (settings.logConnections) {
+            str = Date.now() + ',"';
+            str += (recon ? 're' : '') + 'connect","' + p.id + '"';
+            if (p.WorkerId) str += ',"' + p.WorkerId + '"';
+            if (p.userAgent) str += ',"' + p.userAgent + '"';
+            room.log(str);
+        }
     }
 
     function monitorReconnects(p) {
@@ -69,17 +79,22 @@ module.exports = function(settings, room, runtimeConf) {
         var that, i, len;
         that = this;
 
-        node.on.preconnect(function(player) {
+        node.on.preconnect(function(p) {
             console.log('Player re-connected to Requirements room.');
-            node.game.pl.add(player);
-            connectingPlayer(player);
+            node.game.pl.add(p);
+            connectingPlayer(p, true);
         });
 
         node.on.pconnect(connectingPlayer);
 
-        node.on.pdisconnect(function(player) {
-            console.log('Player disconnected from Requirements room: ' +
-                        player.id);
+        node.on.pdisconnect(function(p) {
+            console.log('Player disconnected from Requirements room: ' + p.id);
+            if (settings.logConnections) {
+                str = Date.now() + ',"disconnect","' + p.id + '"';
+                if (p.WorkerId) str += ',"' + p.WorkerId + '"';
+                if (p.userAgent) str += ',"' + p.userAgent + '"';
+                room.log(str);
+            }
         });
 
         // This must be done manually for now.
