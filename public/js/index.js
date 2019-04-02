@@ -32,6 +32,7 @@ window.onload = function() {
         }
     });
     // Connect to channel.
-    // (If using an alias, must pass the channel name as parameter to connect).
+    // (If using an alias if default channel, must pass the channel name
+    // as parameter to connect).
     node.connect();
 };
