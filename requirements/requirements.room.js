@@ -40,7 +40,6 @@ module.exports = function(settings, room, runtimeConf) {
     }
 
     function connectingPlayer(p, recon) {
-        var str;
         console.log('Player connected to Requirements room.', p.id);
 
         setTimeout(function() {
@@ -60,13 +59,7 @@ module.exports = function(settings, room, runtimeConf) {
 
         }, 500);
 
-        if (settings.logConnections) {
-            str = Date.now() + ',"';
-            str += (recon ? 're' : '') + 'connect","' + p.id + '"';
-            if (p.WorkerId) str += ',"' + p.WorkerId + '"';
-            if (p.userAgent) str += ',"' + p.userAgent + '"';
-            room.log(str);
-        }
+        room.logClientEvent(p, (recon ? 're' : '') + 'connect');
     }
 
     function monitorReconnects(p) {
@@ -89,12 +82,7 @@ module.exports = function(settings, room, runtimeConf) {
 
         node.on.pdisconnect(function(p) {
             console.log('Player disconnected from Requirements room: ' + p.id);
-            if (settings.logConnections) {
-                str = Date.now() + ',"disconnect","' + p.id + '"';
-                if (p.WorkerId) str += ',"' + p.WorkerId + '"';
-                if (p.userAgent) str += ',"' + p.userAgent + '"';
-                room.log(str);
-            }
+            room.logClientEvent(p, 'disconnect');
         });
 
         // This must be done manually for now.

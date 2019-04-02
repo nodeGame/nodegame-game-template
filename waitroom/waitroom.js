@@ -43,12 +43,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
         // Notify players that somebody disconnected.
         waitRoom.notifyPlayerUpdate();
 
-        if (settings.logConnections) {
-            str = Date.now() + ',"disconnect","' + p.id + '"';
-            if (p.WorkerId) str += ',"' + p.WorkerId + '"';
-            if (p.userAgent) str += ',"' + p.userAgent + '"';
-            waitRoom.log(str);
-        }
+        waitRoom.logClientEvent(p, 'disconnect');
     }
 
     // Using self-calling function to put `firstTime` into closure.
@@ -59,15 +54,8 @@ module.exports = function(settings, waitRoom, runtimeConf) {
         var widgetConfig;
         var n;
         var isBot;
-        var str;
 
-        if (settings.logConnections) {
-            str = Date.now() + ',"';
-            str += (recon ? 're' : '') + 'connect","' + p.id + '"';
-            if (p.WorkerId) str += ',"' + p.WorkerId + '"';
-            if (p.userAgent) str += ',"' + p.userAgent + '"';
-            waitRoom.log(str);
-        }
+        waitRoom.logClientEvent(p, (recon ? 're' : '') + 'connect');
 
         node.remoteCommand('stop', p.id);
 
