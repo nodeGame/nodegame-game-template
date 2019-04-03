@@ -35,9 +35,10 @@
 var path = require('path');
 var fs = require('fs');
 var J = require('JSUS').JSUS;
+var NDDB = require('NDDB').NDDB;
 
 module.exports = function(settings, done) {
-    var nCodes, i, codes;
+    var nCodes, i, db, codes;
     var dk, confPath;
     var format, code;
     var keys;
@@ -83,11 +84,11 @@ module.exports = function(settings, done) {
     if (settings.mode === 'local') {
         // Default paths.
         if ('undefined' === typeof settings.inFile) {
-            settings.inFile = settings.authDir + 'codes.json';
+            settings.inFile = path.join(settings.authDir, 'codes.json');
              if (!fs.existsSync(settings.inFile)) {
-                settings.inFile = settings.authDir + 'codes.js';
+                 settings.inFile = path.join(settings.authDir, 'codes.js');
                  if (!fs.existsSync(settings.inFile)) {
-                     settings.inFile = settings.authDir + 'codes.csv';
+                     settings.inFile = path.join(settings.authDir, 'codes.csv');
                      if (!fs.existsSync(settings.inFile)) {
                          throw new TypeError('auth.settings: mode="local", ' +
                                              'but codes.[json|js|csv] not ' +
@@ -122,24 +123,16 @@ module.exports = function(settings, done) {
 
         // CSV.
         if (format === 'csv') {
-            (function() {
-                var csv, reader;
-                codes = [];
-                csv = require('ya-csv');
-                reader = csv.createCsvFileReader(settings.inFile, {
-                    separator: ',',
-                    quote: '"',
-                    escape: '"',
-                    comment: '',
-                    columnsFromHeader: true
-                });
-                reader.addListener('data', function(row) {
-                    codes.push(row);
-                });
-                reader.addListener('end', function() {
-                    done(null, codes);
-                });
-            })();
+            db = new NDDB();
+            db.load(settings.inFile, {
+                separator: ',',
+                quote: '"',
+                escape: '"',
+                comment: '',
+                columnsFromHeader: true
+            }, function() {
+                done(null, db.fetch());
+            });
             return;
         }
         // JSON and JS.
