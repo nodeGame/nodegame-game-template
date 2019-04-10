@@ -124,13 +124,7 @@ module.exports = function(settings, done) {
         // CSV.
         if (format === 'csv') {
             db = new NDDB();
-            db.load(settings.inFile, {
-                separator: ',',
-                quote: '"',
-                escape: '"',
-                comment: '',
-                columnsFromHeader: true
-            }, function() {
+            db.load(settings.inFile, function() {
                 done(null, db.fetch());
             });
             return;
