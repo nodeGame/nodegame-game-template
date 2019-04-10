@@ -98,12 +98,12 @@ module.exports = function(settings, done) {
              }
         }
         // Custom paths.
-        else if ('string' === typeof settings.inFile ||
-                 settings.inFile.trim() === '') {
+        else if ('string' === typeof settings.inFile &&
+                 settings.inFile.trim() !== '') {
 
             // Convert to absolute path.
             if (!path.isAbsolute(settings.inFile)) {
-                settings.inFile = settings.authDir + settings.inFile;
+                settings.inFile = path.join(settings.authDir, settings.inFile);
             }
 
             if (!fs.existsSync(settings.inFile)) {
@@ -125,7 +125,10 @@ module.exports = function(settings, done) {
         if (format === 'csv') {
             db = new NDDB();
             db.load(settings.inFile, function() {
-                done(null, db.fetch());
+                var codes;
+                codes = db.fetch();
+                if (!codes.length) done('Auth.codes: no codes found!');
+                else done(null, codes);
             });
             return;
         }
@@ -148,39 +151,28 @@ module.exports = function(settings, done) {
 
     if (settings.mode === 'remote') {
 
+        throw new Error('auth.codes.js: remote option is not available ' +
+                        'in this version of nodeGame. Please contact the' +
+                        'developers in case you need this feature.');
+
         // Reads in descil-mturk configuration.
         confPath = path.resolve(__dirname, 'descil.conf.js');
         dk = require('descil-mturk')();
 
         dk.readConfiguration(confPath);
 
-        // Load code database.
-        if (settings.mode === 'remote') {
+        // Convert format.
+        dk.codes.on('insert', function(o) {
+            o.id = o.AccessCode;
+        });
 
-            // Convert format.
-            dk.codes.on('insert', function(o) {
-                o.id = o.AccessCode;
-            });
-
-            dk.getCodes(function() {
-                if (!dk.codes.size()) {
-                    done('Auth.codes: no codes found!');
-                }
-                console.log(dk.codes.db);
-                done(null, dk.codes.db);
-            });
-        }
-        else if (settings.mode === 'local') {
-            dk.readCodes(function() {
-                if (!dk.codes.size()) {
-                    done('Auth.codes: no codes found!');
-                }
-            });
-        }
-        else {
-            done('Auth.codes: Unknown settings.');
-        }
-
+        dk.getCodes(function() {
+            if (!dk.codes.size()) {
+                done('Auth.codes: no codes found!');
+            }
+            console.log(dk.codes.db);
+            done(null, dk.codes.db);
+        });
         return;
     }
 
