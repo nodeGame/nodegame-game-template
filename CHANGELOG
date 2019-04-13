@@ -1,7 +1,11 @@
 # CHANGELOG
 
-## current
+## 5.1.0
 - Removed unused option SESSION_ID from game.settings.
+- Removed option to load auth codes from "remote" for now.
+- Automatic logging of all clients in rooms.
+- Removed references to ya-csv, now all NDDB.
+- Cleanup.
 
 ## 5.0.0
 - No changes.
