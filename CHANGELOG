@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 5.1.1
+- Fixed typo SOUND -> SOUNDS in waitroom.settings.
+
 ## 5.1.0
 - Removed unused option SESSION_ID from game.settings.
 - Removed option to load auth codes from "remote" for now.
