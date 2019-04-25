@@ -416,7 +416,7 @@ module.exports = {
      *
      * @see WaitingRoom.sounds
      */
-    SOUND: {
+    SOUNDS: {
 
         /**
          * ## dispatch
@@ -425,7 +425,6 @@ module.exports = {
          *
          * If TRUE, plays default sound, if string plays the file sound
          * located at the specified uri.
-         *
          */
         // dispatch: false
     },
