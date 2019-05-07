@@ -91,7 +91,16 @@ module.exports = {
      *   - 'persistent': cookies must persist across session
      *   - 'session': cookies must be set within same session
      */
-    cookieSupport: 'persistent'
+    cookieSupport: 'persistent',
+
+    /**
+     * ## ES6Support
+     *
+     * If TRUE, browser must support JS ES6 standard.
+     *
+     * Default: FALSE
+     */
+    // ES6Support: true
 
     /**
      * ## nextRoom
