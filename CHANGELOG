@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 5.2.0
+- ES6Support test.
+
 ## 5.1.1
 - Fixed typo SOUND -> SOUNDS in waitroom.settings.
 

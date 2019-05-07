@@ -24,6 +24,10 @@ module.exports = function(requirements, settings) {
         requirements.add(ngr.loadFrameTest);
     }
 
+    if (settings.ES6Support === true) {
+        requirements.add(ngr.ES6Support);
+    }
+
     if (settings.cookieSupport) {
         requirements.add(ngr.cookieSupport, settings.cookieSupport);
     }
