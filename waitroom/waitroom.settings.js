@@ -174,7 +174,7 @@ module.exports = {
      *
      * Receives as first parameter the waiting room object itself.
      */
-    // this.ON_OPEN = null;
+    // ON_OPEN = null;
 
     /**
      * ### WaitingRoom.ON_CLOSE (function) Optional
@@ -183,7 +183,7 @@ module.exports = {
      *
      * Receives as first parameter the waiting room object itself.
      */
-    // this.ON_CLOSE = null;
+    // ON_CLOSE = null;
 
     /**
      * ## ON_CONNECT (function) Optional
@@ -192,7 +192,7 @@ module.exports = {
      *
      * Receives as first parameter the waiting room object itself.
      */
-    // this.ON_CONNECT = null;
+    // ON_CONNECT = null;
 
     /**
      * ## ON_DISCONNECT (function) Optional
@@ -201,7 +201,7 @@ module.exports = {
      *
      * Receives as first parameter the waiting room object itself.
      */
-    // this.ON_DISCONNECT = null;
+    // ON_DISCONNECT = null;
 
     /**
      * ## ON_INIT (function) Optional
@@ -210,7 +210,7 @@ module.exports = {
      *
      * Receives as first parameter the waiting room object itself.
      */
-    // this.ON_INIT = null;
+    // ON_INIT = null;
 
     /**
      * ## ON_DISPATCH (function) Optional
@@ -220,7 +220,7 @@ module.exports = {
      * Receives as first parameter the waiting room object itself,
      * and the options of the dispatch call as second parameter.
      */
-    // this.ON_DISPATCH = null;
+    // ON_DISPATCH = null;
 
     /**
      * ## ON_DISPATCHED (function) Optional
@@ -230,7 +230,7 @@ module.exports = {
      * Receives as first parameter the waiting room object itself,
      * and the options of the dispatch call as second parameter.
      */
-    // this.ON_DISPATCHED = null;
+    // ON_DISPATCHED = null;
 
     /**
      * ## ON_FAILED_DISPATCH (function) Optional
@@ -241,7 +241,7 @@ module.exports = {
      * the options of the dispatch call as second parameter, and
      * optionally the error message as third parameter.
      */
-    // this.ON_FAILED_DISPATCH = null;
+    // ON_FAILED_DISPATCH = null;
 
     /**
      * ## DISPATCH_TO_SAME_ROOM (boolean) Optional
