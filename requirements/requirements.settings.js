@@ -31,6 +31,9 @@ module.exports = {
      * ## speedTest
      *
      * If set, client must exchange messages with server "quickly enough"
+     *
+     * Note: `getFromAdmins` must be TRUE in file `channel/channel.settings.js`,
+     * default is TRUE.
      */
     speedTest: {
         messages: 1,
