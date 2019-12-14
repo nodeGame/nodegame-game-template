@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 5.4.0
+- Bot client type.
+- Code cleanup.
+
 ## 5.2.2
 - Removed typos from waiting room settings template.
 
