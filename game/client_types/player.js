@@ -26,21 +26,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             return node.JSUS.isInt(n, -1, 101);
         };
 
-        this.randomOffer = function(offer, submitOffer) {
-            var n;
-            n = J.randomInt(-1,100);
-            offer.value = n;
-            submitOffer.click();
-        };
-
         // Setup page: header + frame.
         header = W.generateHeader();
         frame = W.generateFrame();
 
         // Add widgets.
-        this.visualRound = node.widgets.append('VisualRound', header, {
-            title: false
-        });
+        this.visualRound = node.widgets.append('VisualRound', header);
+
         this.visualTimer = node.widgets.append('VisualTimer', header);
 
         this.doneButton = node.widgets.append('DoneButton', header);
@@ -60,12 +52,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             DICTATOR: {
                 timer: settings.bidTime,
                 cb: function() {
-                    var button, offer, div;
+                    var button, offer;
 
                     // Make the dictator display visible.
-                    div = W.getElementById('dictator').style.display = '';
-                    button = W.getElementById('submitOffer');
-                    offer =  W.getElementById('offer');
+                    W.getElementById('dictator').style.display = '';
+                    // W.gid = W.getElementById.
+                    button = W.gid('submitOffer');
+                    offer =  W.gid('offer');
 
                     // Listen on click event.
                     button.onclick = function() {
@@ -86,8 +79,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     };
                 },
                 timeup: function() {
-                    node.game.randomOffer(W.getElementById('offer'),
-                                          W.getElementById('submitOffer'));
+                    var n;
+                    // Generate random value.
+                    n = J.randomInt(-1,100);
+                    // Set value in the input box.
+                    W.gid('offer').value = n;
+                    // Click the submit button to trigger the event listener.
+                    W.gid('submitOffer').click();
                 }
             },
             OBSERVER: {
@@ -106,7 +104,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                                        'The dictator offered: ' +
                                        msg.data + ' ECU.');
 
-                        node.timer.randomDone();
+                        setTimeout(function() {
+                            node.done();
+                        }, 5000);
                     });
                 }
             }

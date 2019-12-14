@@ -34,7 +34,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             roles: [ 'DICTATOR', 'OBSERVER' ],
             match: 'round_robin',
             cycle: 'mirror_invert',
-            sayPartner: false
+            // sayPartner: false
             // skipBye: false,
 
         },
@@ -63,6 +63,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('end', {
         cb: function() {
+            // Save data in the data/roomXXX directory.
             node.game.memory.save('data.json');
         }
     });
