@@ -10,4 +10,3 @@ node_modules
 *.geany
 *.swp
 Session.vim
-private
