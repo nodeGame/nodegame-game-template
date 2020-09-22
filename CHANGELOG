@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 5.4.1
+- Log clients settings.
+
 ## 5.4.0
 - Bot client type.
 - Code cleanup.
