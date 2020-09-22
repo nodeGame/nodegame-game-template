@@ -262,4 +262,33 @@ module.exports = {
      */
     // roomCounterSeparator: '@'
 
+    /**
+     * ## logClients
+     *
+     * If TRUE, all connected/disconnected clients are logged to a csv file
+     *
+     * Default: FALSE
+     */
+    // logClients: true,
+
+    /**
+     * ## logClientsExtra
+     *
+     * Adds additional fields to the file of logged clients
+     *
+     * Default: undefined
+     */
+    // logClientsExtra: function(p) {
+    //     return [ p.WorkerId || 'NA', p.HITId || 'NA',
+    //              p.AssignmentId || 'NA', p.ExitCode || 'NA' ];
+    // },
+
+    /**
+    * ## logClientsInterval
+    *
+    * How often (in milliseconds) data about clients is written to file system
+    *
+    * Default: 10000
+    */
+    // logClientsInterval: 10000,
 };
