@@ -1,5 +1,5 @@
 /**
- * # Bot type implementation of the game stages
+ * # Autoplay type implementation of the game stages
  * Copyright(c) {YEAR} {AUTHOR} <{AUTHOR_EMAIL}>
  * MIT Licensed
  *
@@ -8,67 +8,55 @@
  * http://www.nodegame.org
  */
 
+const ngc =  require('nodegame-client');
+
 module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
-    var channel = gameRoom.channel;
-    var node = gameRoom.node;
-    var ngc =  require('nodegame-client');
-
-    var game, stager;
-
-    game = gameRoom.getClientType('player');
-    game.env.auto = true;
+    // Retrieve the player client type and rename its nodename property.
+    let game = gameRoom.getClientType('player');
     game.nodename = 'autoplay';
 
+    // Create a new stager based on the player client type.
     stager = ngc.getStager(game.plot);
 
-    stager.extendAllSteps(function(o) {
-        var role;
-        if (o.roles) {
-            o._roles = {};
-            for (role in o.roles) {
-                if (o.roles.hasOwnProperty(role)) {
-                    // Copy only cb property.
-                    o._roles[role] = o.roles[role].cb;
-                    // Make a new one.
-                    o.roles[role].cb = function() {
-                        var _cb, stepObj, id;
-                        stepObj = this.getCurrentStepObj();
-                        id = stepObj.id
+    // Modyfy the new stager's init property, so that at every step
+    // it performs an automatic choice, after the PLAYING even is fired.
+    let origInit = stager.getOnInit();
+    if (origInit) stager.setDefaultProperty('origInit', origInit);
 
-                        _cb = stepObj._roles[this.role];
-                        _cb.call(this);
+    stager.setOnInit(function() {
 
-                        if ((this.role === 'DICTATOR' && id === 'game')) {
-                            node.on('PLAYING', function() {
-                                node.timer.randomExec(function() {
-                                    node.game.timer.doTimeUp();
-                                });
-                            });
-                        }
-                    }
+        // Call the original init function, if found.
+        let origInit = node.game.getProperty('origInit');
+        if (origInit) origInit.call(this);
+
+        // Auto play, depedending on the step.
+        node.on('PLAYING', function() {
+            let id = node.game.getStepId();
+            node.timer.setTimeout(function() {
+                // Widget steps.
+                if (id === 'quiz' ||
+                    id === 'questionnaire' ||
+                    id === 'mood') {
+
+                    // Auto-answer correctly survey widgets.
+                    node.widgets.lastAppended.setValues({ correct: true });
                 }
-            }
-        }
-        else {
-            o._cb = o.cb;
-            o.cb = function() {
-                var _cb, stepObj, id;
-                stepObj = this.getCurrentStepObj();
-                id = stepObj.id
 
-                _cb = stepObj._cb;
-                _cb.call(this);
+                else if ((node.game.role === 'DICTATOR' && id === 'game')) {
+                    node.timer.random.timeup();
+                }
+                // Call done in other stages, exept the last one.
+                else if (id !== 'end') {
+                    node.timer.random(2000).done();
+                }
 
-                // TODO: Adapt to specific steps.
-                // if (id === XXX) ...
+            }, 2000);
+        });
 
-                node.timer.randomDone(2000);
-            };
-        }
-        return o;
     });
 
+    // Return game object.
     game.plot = stager.getState();
     return game;
 };
