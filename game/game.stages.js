@@ -14,7 +14,7 @@ module.exports = function(stager, settings) {
      stager
         .next('instructions')
         .next('quiz')
-        .repeat('game', settings.REPEAT)
+        .repeat('game', settings.ROUNDS)
         .next('end')
         .gameover();
 

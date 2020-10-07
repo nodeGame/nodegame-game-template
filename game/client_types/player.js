@@ -31,6 +31,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         frame = W.generateFrame();
 
         // Add widgets.
+        this.visuaStage = node.widgets.append('VisualStage', header);
         this.visualRound = node.widgets.append('VisualRound', header);
         this.visualTimer = node.widgets.append('VisualTimer', header);
         this.doneButton = node.widgets.append('DoneButton', header);
@@ -42,13 +43,21 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStep('instructions', {
         frame: 'instructions.htm',
         cb: function() {
+            // Note: we need to specify node.game.settings,
+            // and not simply settings, because this code is
+            // executed on the client.
+            var s = node.game.settings;
             // Replace variables in the instructions.
-            W.setInnerHTML('coins', node.game.settings.COINS);
-            W.setInnerHTML('rounds', node.game.settings.ROUNDS);
+            W.setInnerHTML('coins', s.COINS);
+            W.setInnerHTML('rounds', s.ROUNDS);
+            W.setInnerHTML('exchange-rate', (s.COINS * s.EXCHANGE_RATE));
         }
     });
 
     stager.extendStep('quiz', {
+        init: function() {
+            node.game.visualTimer.hide();
+        },
         cb: function() {
             // Modify CSS rules on the fly.
             W.cssRule('.choicetable-left, .choicetable-right ' +
@@ -90,11 +99,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 },
                 className: 'centered'
             }
-        }
+        },
+        exit: function() {
+            node.game.visualTimer.show();
+        },
     });
 
     stager.extendStep('game', {
-        donebutton: false,
         frame: 'game.htm',
         roles: {
             DICTATOR: {
@@ -109,15 +120,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     node.game.bid = node.widgets.append('CustomInput', div, {
                         type: 'int',
                         min: 0,
-                        // Note: we need to specify node.game.settings,
-                        // and not simply settings, because this code is
-                        // executed on the client.
                         max: node.game.settings.COINS,
                         requiredChoice: true,
                         className: 'centered',
                         root: 'container',
                         mainText: 'Make an offer between 0 and ' +
-                            settings.COINS + ' to another player'
+                            node.game.settings.COINS + ' to another player'
                     });
                 },
 
@@ -153,7 +161,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStep('end', {
         init: function() {
             node.game.doneButton.destroy();
-            node.game.visualTimer.setToZero();
+            node.game.visualTimer.destroy();
         },
         frame: 'end.htm'
     });

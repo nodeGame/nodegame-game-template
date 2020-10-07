@@ -41,7 +41,7 @@ module.exports = {
     COINS: 100,
 
     // Exchange rate coins to dollars.
-    EXCHANGE_RATE: 1000,
+    EXCHANGE_RATE: 0.05,
 
     // # Treatments definition.
 
