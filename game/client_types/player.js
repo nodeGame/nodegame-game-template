@@ -19,7 +19,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         // Initialize the client.
 
-        var header, frame;
+        var header;
 
         // Bid is valid if it is a number between 0 and 100.
         this.isValidBid = function(n) {
@@ -28,7 +28,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         // Setup page: header + frame.
         header = W.generateHeader();
-        frame = W.generateFrame();
+        W.generateFrame();
 
         // Add widgets.
         this.visuaStage = node.widgets.append('VisualStage', header);
@@ -67,6 +67,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                       'font-weight: normal; padding-left: 10px; }');
         },
 
+        // Make a widget step.
         widget: {
             name: 'ChoiceManager',
             id: 'quiz',
@@ -163,6 +164,25 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             node.game.doneButton.destroy();
             node.game.visualTimer.destroy();
         },
-        frame: 'end.htm'
+        frame: 'end.htm',
+        // Another widget-step (see the mood step above).
+        widget: {
+            name: 'EndScreen',
+            root: 'container',
+            options: {
+                panel: false,
+                title: false,
+                showEmailForm: true,
+                showFeedbackForm: true,
+                email: {
+                    texts: {
+                        label: 'Enter your email (optional):',
+                        errString: 'Please enter a valid email and retry',
+                        setMsg: true // Sends a set message for logic's db.
+                    }
+                },
+                feedback: { minLength: 50 }
+            }
+        }
     });
 };

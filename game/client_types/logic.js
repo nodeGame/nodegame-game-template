@@ -39,16 +39,48 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 // Send the decision to the other player.
                 node.say('decision', observer, msg.data.offer);
 
+                // Update earnings counts, so that it can be saved
+                // with GameRoom.computeBonus.
+                gameRoom.updateWin(msg.from, settings.COINS - offer);
+                gameRoom.updateWin(observer, offer);
+
             });
             console.log('Game round: ' + node.player.stage.round);
         }
     });
 
-    stager.extendStep('end', {
-        cb: function() {
+    stager.extendStep('endgame', {
+        init: function() {
 
-            // Save data in the data/roomXXX directory.
-            node.game.memory.save('data.json');
+            // Feedback.
+            node.game.memory.view('feedback').save('feedback.csv', {
+                headers: [ 'time', 'timestamp', 'player', 'feedback' ],
+                recurrent: true,
+                recurrentInterval: 50000
+            });
+
+            // Email.
+            node.game.memory.view('email').save('email.csv', {
+                headers: [ 'timestamp', 'player', 'email' ],
+                recurrent: true,
+                recurrentInterval: 50000
+            });
+
+        },
+        cb: function endgame() {
+            console.log('FINAL PAYOFF PER PLAYER');
+            console.log('***********************');
+
+            gameRoom.computeBonus({
+                say: true,   // default false
+                dump: true,  // default false
+                print: true,  // default false
+                addDisconnected: true, // default false
+                amt: true, // default false (auto-detect)
+            });
+
+            // Dump all memory.
+            node.game.memory.save('memory_all.json');
         }
     });
 
