@@ -49,7 +49,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
-    stager.extendStep('endgame', {
+    stager.extendStep('end', {
         init: function() {
 
             // Feedback.
@@ -67,10 +67,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             });
 
         },
-        cb: function endgame() {
-            console.log('FINAL PAYOFF PER PLAYER');
-            console.log('***********************');
-
+        cb: function() {
             gameRoom.computeBonus({
                 say: true,   // default false
                 dump: true,  // default false

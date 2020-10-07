@@ -97,8 +97,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 ],
                 formsOptions: {
                     shuffleChoices: true
-                },
-                className: 'centered'
+                }
             }
         },
         exit: function() {
@@ -123,19 +122,20 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         min: 0,
                         max: node.game.settings.COINS,
                         requiredChoice: true,
-                        className: 'centered',
-                        root: 'container',
                         mainText: 'Make an offer between 0 and ' +
                             node.game.settings.COINS + ' to another player'
                     });
                 },
-
+                done: function() {
+                    return { offer: node.game.bid.getValues().value };
+                },
                 timeup: function() {
                     node.game.bid.setValues();
                     node.done();
                 }
             },
             OBSERVER: {
+                donebutton: false,
                 cb: function() {
                     var div, dotsObj;
 
@@ -145,13 +145,15 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     dotsObj = W.addLoadingDots(W.gid('dots'));
 
                     node.on.data('decision', function(msg) {
+                        node.game.doneButton.enable();
                         dotsObj.stop();
                         W.setInnerHTML('waitingFor', 'Decision arrived: ');
                         W.setInnerHTML('decision',
                                        'The dictator offered: ' +
                                        msg.data + ' ECU.');
 
-                        // Leave the decision visible for 5 seconds.
+                        // Leave the decision visible for up 5 seconds.
+                        // If user clicks Done, it can advance faster.
                         node.timer.wait(5000).done();
                     });
                 }
@@ -164,8 +166,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             node.game.doneButton.destroy();
             node.game.visualTimer.destroy();
         },
-        frame: 'end.htm',
-        // Another widget-step (see the mood step above).
+        // frame: 'end.htm',
         widget: {
             name: 'EndScreen',
             root: 'container',
@@ -181,7 +182,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         setMsg: true // Sends a set message for logic's db.
                     }
                 },
-                feedback: { minLength: 50 }
+                feedback: { minChars: 50 }
             }
         }
     });
