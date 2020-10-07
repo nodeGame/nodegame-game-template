@@ -34,12 +34,14 @@ module.exports = {
 
     // # Game specific properties
 
-    // Number of game rounds repetitions.
-    REPEAT: 4,
+    // Number of game rounds to repeat.
+    ROUNDS: 4,
 
-    // In case an incoming offer does not pass validation, which indicates
-    // cheating, re-set the dictator's offer to this value.
-    defaultOffer: 100,
+    // Number of coins available each round.
+    COINS: 100,
+
+    // Exchange rate coins to dollars.
+    EXCHANGE_RATE: 1000,
 
     // # Treatments definition.
 
