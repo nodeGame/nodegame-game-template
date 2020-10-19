@@ -11,19 +11,21 @@
 module.exports = {
 
     /**
-     * ## EXECUTION_MODE (string)
+     * ## EXECUTION_MODE
      *
      * Sets the execution mode of the waiting room
      *
      * Different modes might have different default values, and need
-     * different settintgs.
+     * different settings.
      *
      * Available modes:
      *
-     *   - ´TIMEOUT´, waits until the time is up, then it checks
+     *   - `TIMEOUT`, waits until the time is up, then it checks
      *        whether enough players are connected to start the game.
-     *   - ´WAIT_FOR_N_PLAYERS´, the game starts right away as soon as
+     *   - `WAIT_FOR_N_PLAYERS`, the game starts right away as soon as
      *        the desired number of connected players is reached.
+     *   - `WAIT_FOR_DISPATCH`, the game starts when it receives a
+     *        command to dispatch from the monitor.
      */
     EXECUTION_MODE: 'WAIT_FOR_N_PLAYERS',
 
@@ -190,9 +192,14 @@ module.exports = {
      *
      * Callback to be executed when a player connects
      *
-     * Receives as first parameter the waiting room object itself.
+     * Receives as first parameter the waiting room object itself and as
+     * second parameter the connecting client.
      */
-    // ON_CONNECT: null;
+     // ON_CONNECT: function(waitRoom, player) {
+     //     // Auto play with bots on connect of a human player.
+     //     if (player.clientType === 'bot') return;
+     //     waitRoom.dispatchWithBots();
+     // },
 
     /**
      * ## ON_DISCONNECT (function) Optional

@@ -21,11 +21,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         var header;
 
-        // Bid is valid if it is a number between 0 and 100.
-        this.isValidBid = function(n) {
-            return node.JSUS.isInt(n, -1, 101);
-        };
-
         // Setup page: header + frame.
         header = W.generateHeader();
         W.generateFrame();
@@ -162,28 +157,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('end', {
+        widget: 'EndScreen',
         init: function() {
             node.game.doneButton.destroy();
             node.game.visualTimer.destroy();
-        },
-        // frame: 'end.htm',
-        widget: {
-            name: 'EndScreen',
-            root: 'container',
-            options: {
-                panel: false,
-                title: false,
-                showEmailForm: true,
-                showFeedbackForm: true,
-                email: {
-                    texts: {
-                        label: 'Enter your email (optional):',
-                        errString: 'Please enter a valid email and retry',
-                        setMsg: true // Sends a set message for logic's db.
-                    }
-                },
-                feedback: { minChars: 50 }
-            }
         }
     });
 };
