@@ -34,18 +34,17 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         node.on('PLAYING', function() {
             let id = node.game.getStepId();
             node.timer.setTimeout(function() {
-                // Widget steps.
-                if (id === 'quiz' ||
-                    id === 'questionnaire' ||
-                    id === 'mood') {
 
+                // Widget steps.
+                if (id === 'quiz') {
                     // Auto-answer correctly survey widgets.
                     node.widgets.lastAppended.setValues({ correct: true });
                 }
 
-                if ((node.game.role === 'DICTATOR' && id === 'game')) {
+                if (id === 'game') {
                     node.timer.random.timeup();
                 }
+
                 // Call done in other stages, exept the last one.
                 else if (id !== 'end') {
                     node.timer.random(2000).done();
