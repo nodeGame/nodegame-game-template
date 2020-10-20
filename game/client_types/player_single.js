@@ -118,7 +118,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 id: 'guess',
                 mainText: 'The system will generate a random number between ' +
                           '1 and 10. Will the random number be larger than 5?',
-                choices: [ 'Yes, greater than 5', 'No, smaller than 5' ],
+                choices: [ 'Yes, larger than 5', 'Smaller than or equal to 5' ],
                 hint: '(A random decision will be made if timer expires)',
                 requiredChoice: true,
                 shuffleChoices: true,
@@ -128,7 +128,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         },
         done: function(values) {
             return {
-                greater: values.value === 'Yes, greater than 5'
+                greater: values.value === 'Yes, larger than 5'
             };
         },
         timeup: function() {
@@ -141,12 +141,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         frame: 'game.htm',
         cb: function() {
             node.game.visualTimer.setToZero();
-            node.on.data('RESULT', function(msg) {
-                W.setInnerHTML('yourdecision', msg.data.guess ?
+            // Ask for the outcome to server.
+            node.get('result', function(data) {
+                // Display information to screen.
+                W.setInnerHTML('yourdecision', data.guess ?
                     'Greater than 5' : 'Smaller than or equal to 5');
-                W.setInnerHTML('randomnumber', msg.data.randomnumber);
-                W.setInnerHTML('winlose',
-                    msg.data.win ? 'You won!' : 'You lost!');
+                W.setInnerHTML('randomnumber', data.randomnumber);
+                W.setInnerHTML('winlose', data.win ? 'You won!' : 'You lost!');
                 // Leave the decision visible for up 5 seconds.
                 // If user clicks Done, it can advance faster.
                 node.game.visualTimer.restart(5000);

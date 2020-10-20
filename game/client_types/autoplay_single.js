@@ -41,7 +41,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     node.widgets.lastAppended.setValues({ correct: true });
                 }
 
-                if (id === 'game') {
+                if (id === 'guess') {
                     node.timer.random.timeup();
                 }
 
