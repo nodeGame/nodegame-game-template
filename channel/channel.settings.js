@@ -22,6 +22,15 @@
 module.exports = {
 
     /**
+     * ## enabled (boolean) Optional
+     *
+     * Set to FALSE to disable loading this channel at startup
+     *
+     * Default: TRUE
+     */
+    enabled: true,
+
+    /**
      * ## name (string) Optional
      *
      * The name of the channel
@@ -196,12 +205,14 @@ module.exports = {
      * The route `/gamename` will be disabled, while aliases,
      * if defined, will continue to work if not shadowed by any public path.
      *
-     * Important! Socket.io connection must still be established
-     * with the right endpoint (e.g. /channelName).
+     * Important! Socket.io connection must be established
+     * with the right endpoint (i.e., node.connect("/channelName").
+     * Check the public/index.htm file or public/js/index.js file for the
+     * connect statement.
      *
      * Important! Other games might not be reachable any more.
      *
-     * Important! Server info query will be disabled.
+     * @deprecated. Use option --default at startup
      *
      * Default: false
      */
@@ -251,17 +262,6 @@ module.exports = {
      */
     // roomCounterPadChars: 6
 
-    // Reserved for future versions:
-
-    /**
-     * ### roomCounterSeparator (character) Optional
-     *
-     * If set, this char is inserted between the padded room counter and 'room'
-     *
-     * Default: ''
-     */
-    // roomCounterSeparator: '@'
-
     /**
      * ## logClients
      *
@@ -291,4 +291,18 @@ module.exports = {
     * Default: 10000
     */
     // logClientsInterval: 10000,
+
+
+
+
+    // Reserved for future versions:
+
+    /**
+     * ### roomCounterSeparator (character) Optional
+     *
+     * If set, this char is inserted between the padded room counter and 'room'
+     *
+     * Default: ''
+     */
+    // roomCounterSeparator: '@'
 };
