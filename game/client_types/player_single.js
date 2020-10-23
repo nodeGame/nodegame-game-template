@@ -144,7 +144,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             // Ask for the outcome to server.
             node.get('result', function(data) {
                 // Display information to screen.
-                W.setInnerHTML('yourdecision', data.guess ?
+                W.setInnerHTML('yourdecision', data.greater ?
                     'Greater than 5' : 'Smaller than or equal to 5');
                 W.setInnerHTML('randomnumber', data.randomnumber);
                 W.setInnerHTML('winlose', data.win ? 'You won!' : 'You lost!');
