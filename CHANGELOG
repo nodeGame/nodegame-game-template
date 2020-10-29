@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 6.0.1
+- Fixed bug with missing private/ folder in npm.
+
 ## 6.0.0
 - Single-player game available as template.
 
