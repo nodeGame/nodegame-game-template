@@ -70,7 +70,6 @@ module.exports = {
 
         endpoint: '{NAME}',
 
-
         // Anti-spoofing, extra check to see if msg.from matches socket.id
         // on SocketIo socket connections. Spoofed messages are logged
         // normally, and an additional log entry with id and from msg is added.
