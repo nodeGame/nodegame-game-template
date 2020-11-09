@@ -164,9 +164,11 @@ module.exports = {
      * A callback function to be executed on the server when wait time expires
      *
      * The context of execution is WaitingRoom.
+     *
+     * If return value is FALSE, the client is not disposed.
      */
-    // ON_TIMEOUT_SERVER: function(code) {
-    //    console.log('*** I am timed out! ', code.id);
+    // ON_TIMEOUT_SERVER: function(client) {
+    //    console.log('*** I am timed out! ', client.id);
     // }
 
     /**
