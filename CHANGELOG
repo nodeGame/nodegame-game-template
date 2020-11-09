@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## current
+- Better description of ON_TIMEOUT_SERVER.
+
 ## 6.0.1
 - Fixed bug with missing private/ folder in npm.
 
