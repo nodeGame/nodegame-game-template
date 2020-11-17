@@ -12,11 +12,11 @@
  *   - 'local': reads the authorization codes from a file. Defaults:
  *              codes.json, code.csv. A custom file can be specified
  *              in settings.file (available formats: json and csv).
- *   - 'remote': fetches the authorization codes from a remote URI.
- *               Available protocol: DeSciL protocol.
  *   - 'custom': The 'getCodesCb' property of the settings object
  *               will be executed with settings and done callback
  *               as parameters.
+ *   - 'remote': fetches the authorization codes from a remote URI.
+ *               Available protocol: DeSciL protocol. **DISABLED**
  *
  * Client objects are used for authentication. They should be formatted
  * as follows:
@@ -32,10 +32,10 @@
  * ---
  */
 
-var path = require('path');
-var fs = require('fs');
-var J = require('JSUS').JSUS;
-var NDDB = require('NDDB').NDDB;
+const path = require('path');
+const fs = require('fs');
+const J = require('JSUS').JSUS;
+const NDDB = require('NDDB').NDDB;
 
 module.exports = function(settings, done) {
     var nCodes, i, db, codes;
