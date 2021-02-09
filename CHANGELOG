@@ -1,6 +1,7 @@
 # CHANGELOG
 
-## current
+## 6.1.0
+- Improved waitroom.settings.js template.
 - Better description of ON_TIMEOUT_SERVER.
 
 ## 6.0.1
