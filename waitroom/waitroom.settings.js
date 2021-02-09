@@ -80,7 +80,7 @@ module.exports = {
     // START_DATE: new Date().getTime() + 30000,
 
     /**
-     * ## CHOSEN_TREATMENT
+     * ## CHOSEN_TREATMENT (string|function)
      *
      * The treatment assigned to every new group
      *
@@ -359,7 +359,7 @@ module.exports = {
      *
      * @see WaitingRoom.notifyPlayerUpdate
      */
-    // this.NOTIFY_INTERVAL = 200,
+    // NOTIFY_INTERVAL: 200,
 
     /**
      * ## PAGE_TITLE (object) Optional
