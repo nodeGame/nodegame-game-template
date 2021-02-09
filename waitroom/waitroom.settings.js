@@ -80,25 +80,49 @@ module.exports = {
     // START_DATE: new Date().getTime() + 30000,
 
     /**
-     * ## CHOSEN_TREATMENT (string|function)
+     * ## CHOSEN_TREATMENT
      *
      * The treatment assigned to every new group
      *
-     * Accepted values:
+     * It can be the name of a treatment (string), or any valid value:
      *
-     *   - "treatment_rotate": rotates the treatments.
-     *   - undefined: a random treatment will be selected.
-     *   - function: a callback returning the name of the treatment. E.g:
+     *   - "treatment_rotate": rotates the treatments (to offset set
+     *                         ROTATION_OFFSET != 0).
+     *   - "treatment_random": picks a random treatment each time.
+     *   - undefined: defaults to "treatment_random".
+     *   - function: a callback returning the name of the treatment:
      *
-     *       function(treatments, roomCounter) {
-     *           return treatments[roomCounter % treatments.length];
+     *       function(treatments, roomCounter, groupIdx, dispatchCounter) {
+     *           return treatments[dispatchCounter % treatments.length];
      *       }
-     *
-     * Default: undefined, random treatment
      */
-    CHOSEN_TREATMENT: function(treatments, roomCounter) {
+    CHOSEN_TREATMENT: function(treatments, roomCounter,
+                               groupIdx, dispatchCounter) {
+
+        // - treatments: array of available treatments.
+        // - roomCounter: total number of room created (it is initialized to
+        //                the last created room as loaded in the data folder).
+        // - groupIdx: zero-based group index within same dispatch
+        //             (when POOL_SIZE > GROUP_SIZE).
+        // - dispatchCounter: total number of dispatch calls (a dispatch can
+        //                    send players to an existing room, so it may
+        //                    differ from roomCounter).
+
+        // console.log(roomCounter, batchCounter, dispatchCounter);
+
         return treatments[roomCounter % treatments.length];
     },
+
+    /**
+     * ## ROTATION_OFFSET (integer > 0) Optional
+     *
+     * Offsets the rotation when CHOSEN_TREATMENT = "treatment_rotate"
+     *
+     * Default: 0.
+     *
+     * @see CHOSEN_TREATMENT
+     */
+    // ROTATION_OFFSET: 0,
 
     /**
      * ## PLAYER_SORTING
@@ -257,14 +281,15 @@ module.exports = {
      *
      * If TRUE, every new group will be added to the same game room
      *
-     * A new game room will be created for the first dispatch, and
-     * reused for all successive groups. Default, FALSE.
+     * A new game room will be created for the first dispatch of
+     * every treatment and reused for all successive groups. Default: FALSE.
      *
      * Notice: the game must support adding players while it is running.
      *
      * Default: FALSE
      *
      * @see WaitingRoom.lastGameRoom
+     * @see WaitingRoom.lastGameRoomByTreatment
      */
     // DISPATCH_TO_SAME_ROOM: true
 
@@ -324,6 +349,17 @@ module.exports = {
      * Default: false
      */
     // DISCONNECT_IF_NOT_SELECTED: true,
+
+    /**
+     * ## NOTIFY_INTERVAL (integer > 0) Optional
+     *
+     * The number of milliseconds to wait to send a player-update message
+     *
+     * Default: 200
+     *
+     * @see WaitingRoom.notifyPlayerUpdate
+     */
+    // this.NOTIFY_INTERVAL = 200,
 
     /**
      * ## PAGE_TITLE (object) Optional
