@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Current
+- Fixed typos in auth pwd creation
+- Removed special characters from auto pwd creation.
+
 ## 6.1.0
 - Improved waitroom.settings.js template.
 - Better description of ON_TIMEOUT_SERVER.
