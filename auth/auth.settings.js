@@ -171,7 +171,7 @@ module.exports = {
      * (e.g. mode, etc.) and returns synchronously or asynchronously
      * an array of valid authorization codes.
      */
-    //codes: 'path/to/code/generator.js',
+    //codes: 'auth.codes.js',
 
     // # Reserved words for future requirements settings.
 
