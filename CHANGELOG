@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 6.2.0
+- Added nodegame.css to all html files in public.
+
 ## 6.1.1
 - Fixed typos in auth pwd creation
 - Removed special characters from auto pwd creation.
