@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Current
+## 6.1.1
 - Fixed typos in auth pwd creation
 - Removed special characters from auto pwd creation.
 
