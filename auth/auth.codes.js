@@ -176,6 +176,11 @@ module.exports = function(settings, done) {
         // return;
     }
 
+    if (settings.mode === 'external') {
+        // It will be added by query URL.
+        return [];
+    }
+
     // Unknown code.
 
     throw new Error('Unknown authorization mode: ' + settings.mode);
