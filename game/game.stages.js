@@ -12,16 +12,26 @@
 module.exports = function(stager, settings) {
 
      stager
-        .next('instructions')
-        .next('quiz')
-        .repeat('game', settings.ROUNDS)
-        .next('end')
+        .stage('instructions')
+
+        .stage('quiz')
+
+        .repeatStage('game', settings.ROUNDS)
+
+        .stage('end')
+
         .gameover();
 
-    // Modify the stager to skip one stage.
+
+    // Notice: here all stages have one step named after the stage.
+
+    // Skip one stage.
     // stager.skip('instructions');
 
-    // To skip a step within a stage use:
+    // Skip multiple stages:
+    // stager.skip([ 'instructions', 'quiz' ])
+
+    // Skip a step within a stage:
     // stager.skip('stageName', 'stepName');
-    // Notice: here all stages have just one step.
+
 };
