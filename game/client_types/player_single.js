@@ -140,6 +140,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStep('results', {
         frame: 'game.htm',
         cb: function() {
+            // (re-) Hide the results div.
+            W.hide('results');
             node.game.visualTimer.setToZero();
             // Ask for the outcome to server.
             node.get('result', function(data) {
@@ -148,6 +150,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     'Greater than 5' : 'Smaller than or equal to 5');
                 W.setInnerHTML('randomnumber', data.randomnumber);
                 W.setInnerHTML('winlose', data.win ? 'You won!' : 'You lost!');
+                // Show the results div.
+                W.show('results');
                 // Leave the decision visible for up 5 seconds.
                 // If user clicks Done, it can advance faster.
                 node.game.visualTimer.restart(5000);
@@ -157,7 +161,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('end', {
-        widget: 'EndScreen',
+        widget: {
+            name: 'EndScreen',
+            options: { askServer: true }
+        },
         init: function() {
             node.game.visualTimer.destroy();
             node.game.doneButton.destroy();
