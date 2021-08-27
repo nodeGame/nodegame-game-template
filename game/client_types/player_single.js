@@ -161,7 +161,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('end', {
-        widget: 'EndScreen',
+        widget: {
+            name: 'EndScreen',
+            options: { askServer: true }
+        },
         init: function() {
             node.game.visualTimer.destroy();
             node.game.doneButton.destroy();
