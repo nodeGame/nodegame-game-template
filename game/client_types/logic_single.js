@@ -69,30 +69,26 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             };
         });
 
-        node.on.done('game.results', function(msg) {
+        node.on.data('WIN', function(msg) {
 
             let id = msg.from;
 
-            // Last round.
-            if (msg.stage.round === settings.ROUNDS) {
+            // Saves bonus file, and notifies player.
+            gameRoom.computeBonus({
+                append: true,
+                clients: [ id ],
+                say: false
+            });
 
-                // Saves bonus file, and notifies player.
-                gameRoom.computeBonus({
-                    append: true,
-                    clients: [ id ],
-                    say: false
-                });
-
-                let db = memory.player[id];
-                // Select all 'done' items and save its time.
-                db.select('done').save('times.csv', {
-                    header: [
-                        'session', 'player', 'stage', 'step', 'round',
-                        'time', 'timeup'
-                    ],
-                    append: true
-                });
-            }
+            let db = memory.player[id];
+            // Select all 'done' items and save its time.
+            db.select('done').save('times.csv', {
+                header: [
+                    'session', 'player', 'stage', 'step', 'round',
+                    'time', 'timeup'
+                ],
+                append: true
+            });
         });
     });
 
