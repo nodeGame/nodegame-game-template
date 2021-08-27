@@ -76,8 +76,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             // Saves bonus file, and notifies player.
             gameRoom.computeBonus({
                 append: true,
-                clients: [ id ],
-                say: false
+                clients: [ id ]
             });
 
             let db = memory.player[id];
