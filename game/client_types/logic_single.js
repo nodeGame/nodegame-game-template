@@ -26,24 +26,24 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.setOnInit(function() {
 
         // Feedback.
-        memory.view('feedback').save('feedback.csv', {
+        memory.view('feedback').stream({
             header: [ 'time', 'timestamp', 'player', 'feedback' ],
-            keepUpdated: true
+            format: 'csv'
         });
 
         // Email.
-        memory.view('email').save('email.csv', {
+        memory.view('email').stream({
             header: [ 'timestamp', 'player', 'email' ],
-            keepUpdated: true
+            format: 'csv'
         });
 
         // Win.
-        memory.view('win').save('guess.csv', {
+        memory.view('win').stream({
             header: [
                 'session', 'player', 'round', 'greater', 'number', 'win'
             ],
             adapter: { number: 'randomnumber' },
-            keepUpdated: true
+            format: 'csv'
         });
 
         // Update player's guess with information if he or she won.
@@ -69,13 +69,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             };
         });
 
-        node.on.data('done', function(msg) {
+        node.on.done('game.results', function(msg) {
 
             let id = msg.from;
-            let step = node.game.getStepId(msg.stage);
 
-            if (step === 'results' &&
-                msg.stage.round === settings.ROUNDS) {
+            // Last round.
+            if (msg.stage.round === settings.ROUNDS) {
 
                 // Saves bonus file, and notifies player.
                 gameRoom.computeBonus({

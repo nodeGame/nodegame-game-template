@@ -22,6 +22,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.setOnInit(function() {
         // Initialize the client.
+        // Will automatically save every entry in the database
+        // to file memory.json (format ndjson).
+        memory.stream();
     });
 
     stager.extendStep('game', {
@@ -34,7 +37,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         },
         cb: function() {
-            node.once.data('done', function(msg) {
+            node.once.done(function(msg) {
                 let data = msg.data;
                 let offer = data.offer;
 
@@ -54,15 +57,15 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         init: function() {
 
             // Feedback.
-            memory.view('feedback').save('feedback.csv', {
+            memory.view('feedback').stream({
                 header: [ 'time', 'timestamp', 'player', 'feedback' ],
-                keepUpdated: true
+                format: 'csv'
             });
 
             // Email.
-            memory.view('email').save('email.csv', {
+            memory.view('email').stream({
                 header: [ 'timestamp', 'player', 'email' ],
-                keepUpdated: true
+                format: 'csv'
             });
 
         },
@@ -72,7 +75,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             gameRoom.computeBonus();
 
             // Dump all memory.
-            memory.save('memory_all.json');
+            // memory.save('memory_all.json');
 
             // Save times of all stages.
             memory.done.save('times.csv', {
