@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 7.0.1
+- Minified CSS.
+
+## 7.0.0
+- v7 features
+- Minified JS.
+
 ## 6.2.0
 - Added nodegame.css to all html files in public.
 
