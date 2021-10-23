@@ -114,15 +114,35 @@ module.exports = {
     },
 
     /**
-     * ## ROTATION_OFFSET (integer > 0) Optional
+     * ## REMOTE_DISPATCH (string|object) Optional
      *
-     * Offsets the rotation when CHOSEN_TREATMENT = "treatment_rotate"
+     * Redirects participants to a third-party server upon dispatch
      *
-     * Default: 0.
-     *
-     * @see CHOSEN_TREATMENT
+     * Default: false.
      */
-    // ROTATION_OFFSET: 0,
+     // If string.
+     // REMOTE_DISPATCH: 'https://nodegame.org' // Redirect address.
+     // If object.
+     // REMOTE_DISPATCH: {
+     //
+     //     // Redirect address.
+     //     url: 'https://nodegame.org',
+     //
+     //     // If TRUE, appends to the redirect address ?t=treatmentName.
+     //     addTreatment: true,
+     //
+     //     // Manipulates the url before remote dispatch. Parameters:
+     //     // - url: redirect address after addTreatment is evaluated.
+     //     // - treatment: selected treatment.
+     //     // - group: array of player ids to dispatch
+     //     // - waitRoom: reference to the waitRoom object itself.
+     //     preprocess: (url, treatment, group, waitRoom) => {
+     //         // Example: adds the group size and the  id of all players
+     //         // to the redirect address.
+     //         let ids = group.join(',');
+     //         return url + '&l=' + group.length + '&ids=' + ids;
+     //     }
+     // }
 
     /**
      * ## PLAYER_SORTING
