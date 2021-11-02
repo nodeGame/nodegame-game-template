@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 7.0.3
+- Added comments in game.setup.js
+
 ## 7.0.2
 - Inline doc.
 
