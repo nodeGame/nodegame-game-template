@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.1.0 CURRENT
+- Updated waiting room: removed dispatch sound from single-player.
+- Minor fixes.
+
 ## 7.0.3
 - Added comments in game.setup.js
 
