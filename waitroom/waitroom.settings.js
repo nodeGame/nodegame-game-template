@@ -89,6 +89,8 @@ module.exports = {
      *   - "treatment_rotate": rotates the treatments (to offset set
      *                         ROTATION_OFFSET != 0).
      *   - "treatment_random": picks a random treatment each time.
+     *   - "treatment_latin_square": maximize randomness in the rotation of
+     *                               treatments.
      *   - undefined: defaults to "treatment_random".
      *   - function: a callback returning the name of the treatment:
      *

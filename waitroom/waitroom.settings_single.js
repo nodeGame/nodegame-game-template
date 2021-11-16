@@ -88,6 +88,8 @@ module.exports = {
      *
      *   - "treatment_rotate": rotates the treatments (to offset set
      *                         ROTATION_OFFSET != 0).
+     *   - "treatment_latin_square": maximize randomness in the rotation of
+     *                               treatments.
      *   - "treatment_random": picks a random treatment each time.
      *   - undefined: defaults to "treatment_random".
      *   - function: a callback returning the name of the treatment:
@@ -470,7 +472,7 @@ module.exports = {
          * If TRUE, plays default sound, if string plays the file sound
          * located at the specified uri.
          */
-        // dispatch: false
+        dispatch: false
     },
 
     /** ### ALLOW_PLAY_WITH_BOTS
