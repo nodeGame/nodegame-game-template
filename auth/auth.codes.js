@@ -43,9 +43,11 @@ module.exports = function(settings, done) {
     var format, code;
     var keys;
 
+    let mode = settings.mode;
+
     // Synchronous.
 
-    if (settings.mode === 'dummy') {
+    if (mode === 'dummy') {
 
         nCodes = validateNCodes(settings.nCodes);
         codes = new Array(nCodes);
@@ -62,7 +64,7 @@ module.exports = function(settings, done) {
         return codes;
     }
 
-    if (settings.mode === 'auto') {
+    if (mode === 'auto') {
         keys = {};
         nCodes = validateNCodes(settings.nCodes);
         codes = new Array(nCodes);
@@ -81,7 +83,7 @@ module.exports = function(settings, done) {
         return codes;
     }
 
-    if (settings.mode === 'local') {
+    if (mode === 'local') {
         // Default paths.
         if ('undefined' === typeof settings.inFile) {
             settings.inFile = path.join(settings.authDir, 'codes.json');
@@ -138,7 +140,7 @@ module.exports = function(settings, done) {
         }
     }
 
-    if (settings.mode === 'custom') {
+    if (mode === 'custom') {
         if ('function' !== typeof settings.customCb) {
             throw new Error('auth.settings: mode="customCb", but settings.' +
                             'customCb is not a function. Found: ' +
@@ -149,7 +151,7 @@ module.exports = function(settings, done) {
 
     // Asynchronous.
 
-    if (settings.mode === 'remote') {
+    if (mode === 'remote') {
 
         throw new Error('auth.codes.js: remote option is not available ' +
                         'in this version of nodeGame. Please contact the' +
@@ -176,14 +178,14 @@ module.exports = function(settings, done) {
         // return;
     }
 
-    if (settings.mode === 'external') {
+    if (mode === 'external' || mode) {
         // It will be added by query URL.
         return [];
     }
 
     // Unknown code.
 
-    throw new Error('Unknown authorization mode: ' + settings.mode);
+    throw new Error('Unknown authorization mode: ' + mode);
 
 
     // ## Helper functions.

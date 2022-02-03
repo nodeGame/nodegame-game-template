@@ -52,7 +52,6 @@ module.exports = function(settings, waitRoom, runtimeConf) {
         var nPlayers;
         var waitTime;
         var widgetConfig;
-        var n;
         var isBot;
 
         waitRoom.logClientEvent(p, (recon ? 're' : '') + 'connect');
