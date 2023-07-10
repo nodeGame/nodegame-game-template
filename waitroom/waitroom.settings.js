@@ -373,6 +373,18 @@ module.exports = {
     // DISCONNECT_IF_NOT_SELECTED: true,
 
     /**
+     * ## NOTIFY_UPDATES (boolean) Optional
+     *
+     * Sends updates to players about the state of the waiting room
+     *
+     * E.g., if they are not selected for a dispatch or if another player
+     * connects/disconnects.
+     *
+     * Default: true
+     */
+    // NOTIFY_UPDATES: false,
+
+    /**
      * ## NOTIFY_INTERVAL (integer > 0) Optional
      *
      * The number of milliseconds to wait to send a player-update message
@@ -496,22 +508,127 @@ module.exports = {
         // dispatch: false
     },
 
+    // Options to control if users can start the game and how.
+    //////////////////////////////////////////////////////////
+
+    /** ### ALLOW_PLAY_WITH_BOTS
+     *
+     * @deprecated Use ALLOW_USER_DISPATCH instead
+     */
+    // ALLOW_PLAY_WITH_BOTS: true,
+
     /** ### ALLOW_PLAY_WITH_BOTS
      *
      * Allows a player to request to start the game immediately with bots
      *
      * A button is added to the interface.
      */
-    ALLOW_PLAY_WITH_BOTS: true,
+    ALLOW_USER_DISPATCH: true,
 
     /** ### ALLOW_SELECT_TREATMENT
      *
      * Allows a player to select the treatment for the game
      *
-     * This option requires `ALLOW_PLAY_WITH_BOTS` to be TRUE.
+     * This option requires `ALLOW_USER_DISPATCH` to be TRUE.
      *
      * A button is added to the interface.
+     *
+     * @see ALLOW_USER_DISPATCH
      */
-    ALLOW_SELECT_TREATMENT: true
+    ALLOW_SELECT_TREATMENT: true,
+
+    /** ### ADD_DEFAULT_TREATMENTS
+     *
+     * If TRUE, default treatments (e.g., `treatment_rotate`) are displayed
+     *
+     * This option requires both `ALLOW_USER_DISPATCH` and
+     * `ALLOW_SELECT_TREATMENT` to be TRUE.
+     *
+     * Default FALSE
+     *
+     * @see ALLOW_USER_DISPATCH
+     * @see ALLOW_SELECT_TREATMENT
+     */
+    ADD_DEFAULT_TREATMENTS: true,
+
+    /** ### TREATMENT_TILES
+     *
+     * Displays treatments as tiles instead of a dropdown menu
+     *
+     * This is useful to create a simple user interface to select treatments
+     *
+     * This option requires both `ALLOW_USER_DISPATCH` and
+     * `ALLOW_SELECT_TREATMENT` to be TRUE.
+     *
+     * Default TRUE
+     *
+     * @see ALLOW_USER_DISPATCH
+     * @see ALLOW_SELECT_TREATMENT
+     */
+    TREATMENT_TILES: true,
+
+    /** ### TREATMENT_TILE_CB
+     *
+     * Callback to render each treatment tile
+     *
+     * This option requires `ALLOW_USER_DISPATCH`, `ALLOW_SELECT_TREATMENT`,
+     * and `TREATMENT_TILES` to be TRUE.
+     *
+     * Default TRUE
+     *
+     * @see TREATMENT_TILES
+     */
+    TREATMENT_TILE_CB: function(treat, descr, idx, widget) {
+        var str, imgs, img;
+
+        if (treat.substring(0, 10) === 'treatment_') {
+            treat = treat.substring(10, 22);
+            img = 'circle.png'
+        }
+        else {
+            imgs = {
+                pp: "clock.png",
+                standard: "square.png",
+            };
+            img = imgs[treat];
+        }
+
+        str = '<div title="' + descr + '">';
+        if (img) {
+            str += '<img style="width: 30px; margin-right: 20px;" src="icons/';
+            str += img + '" />'
+        }
+        str += treat + '</div>';
+
+        return str;
+    },
+
+    /** ### ALLOW_QUERYSTRING_TREATMENT
+     *
+     * Allows treatment to be selected via query string
+     *
+     * If so, the game immediately starts if a user connects to an url like:
+     *
+     * https://gameserver.com/game/?treat=treamentName
+     *
+     * This option requires both `ALLOW_USER_DISPATCH` and
+     * `ALLOW_SELECT_TREATMENT` to be TRUE.
+     *
+     * @see QUERYSTRING_TREATMENT_VAR
+     *
+     * Default: FALSE
+     */
+    ALLOW_QUERYSTRING_TREATMENT: true,
+
+    /** ### QUERYSTRING_TREATMENT_VAR
+     *
+     * Sets the querystring variable to select a treatment
+     *
+     * This option requires `ALLOW_USER_DISPATCH`, `ALLOW_SELECT_TREATMENT`,
+     * and `ALLOW_QUERYSTRING_TREATMENT` to be TRUE.
+     *
+     * Default: "treat"
+     */
+    QUERYSTRING_TREATMENT_VAR: "treat"
 
 };
